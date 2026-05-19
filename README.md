@@ -80,6 +80,21 @@ LLM applications are compromised every day through **prompt injection**, **PII l
 ### pytest — 41/41 passed, 97.77% coverage
 ![pytest coverage](docs/screenshots/05_pytest_coverage.png)
 
+### REST API — uvicorn startup + live curl /health and /scan
+![api server](docs/screenshots/13_api_server.png)
+
+### REST API tests — 9/9 passing
+![api tests](docs/screenshots/15_api_tests.png)
+
+### Benchmark suite — OWASP LLM Top 10 attack simulation
+![benchmarks](docs/screenshots/14_benchmarks.png)
+
+### Framework integrations — OpenAI / LangChain / FastAPI middleware
+![integrations](docs/screenshots/17_integrations.png)
+
+### Docker — build and run containerised
+![docker](docs/screenshots/16_docker.png)
+
 ### ruff — zero linting issues
 ![ruff clean](docs/screenshots/06_ruff_clean.png)
 
@@ -98,7 +113,7 @@ LLM applications are compromised every day through **prompt injection**, **PII l
 ### Makefile build targets
 ![makefile](docs/screenshots/11_makefile.png)
 
-### OpenAI integration — blocking unsafe prompts in middleware
+### OpenAI middleware — blocking unsafe prompts before API call
 ![openai middleware](docs/screenshots/12_library_middleware.png)
 
 ---
