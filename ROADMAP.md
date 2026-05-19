@@ -31,7 +31,7 @@
 ## v0.3.0 — Q4 2026
 
 - [ ] **VS Code extension** — real-time scan in prompt files
-- [ ] **Browser extension** — pre-send scan for ChatGPT / Claude / Gemini
+- [ ] **Browser extension** — pre-send scan for ChatGPT, Gemini, and other AI chat interfaces
 - [ ] **Benchmark dataset expansion** — 500+ labeled attack examples
 - [ ] **Webhook support** — POST scan results to SIEM / Slack / PagerDuty
 - [ ] **Audit log** — append-only JSON log of all findings with timestamps

@@ -6,9 +6,9 @@ import pytest
 
 pytest.importorskip("fastapi", reason="pip install promptshield[api]")
 
-from fastapi.testclient import TestClient  # noqa: E402
+from fastapi.testclient import TestClient
 
-from api.main import app  # noqa: E402
+from api.main import app
 
 client = TestClient(app)
 
