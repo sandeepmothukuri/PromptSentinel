@@ -1,4 +1,5 @@
 """Run a few example prompts through promptshield to see what it catches."""
+
 from promptshield import Scanner
 
 EXAMPLES = [

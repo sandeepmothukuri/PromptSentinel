@@ -1,4 +1,5 @@
 """Jailbreak pattern detectors."""
+
 from __future__ import annotations
 
 from promptshield.detectors.base import Detector, RegexDetector

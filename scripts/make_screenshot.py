@@ -1,4 +1,5 @@
 """Render a realistic terminal screenshot of promptshield in action."""
+
 from __future__ import annotations
 
 import subprocess

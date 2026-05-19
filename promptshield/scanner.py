@@ -1,4 +1,5 @@
 """Core scanner orchestration."""
+
 from __future__ import annotations
 
 from collections.abc import Iterable, Sequence
@@ -91,9 +92,7 @@ class Scanner:
     ) -> None:
         chosen = list(detectors) if detectors is not None else list(ALL_DETECTORS)
         disabled_set = {d.strip() for d in disabled if d.strip()}
-        self.detectors: list[Detector] = [
-            d for d in chosen if d.name not in disabled_set
-        ]
+        self.detectors: list[Detector] = [d for d in chosen if d.name not in disabled_set]
 
     def scan(self, text: str) -> Report:
         report = Report(text=text)

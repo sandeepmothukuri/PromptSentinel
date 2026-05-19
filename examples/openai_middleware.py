@@ -2,6 +2,7 @@
 Drop-in middleware for OpenAI — blocks HIGH+ findings before they reach the API.
 Run: pip install openai && python examples/openai_middleware.py
 """
+
 from __future__ import annotations
 
 from promptshield import Scanner

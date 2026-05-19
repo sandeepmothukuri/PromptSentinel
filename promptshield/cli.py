@@ -1,4 +1,5 @@
 """Command-line interface — pure stdlib, no required deps."""
+
 from __future__ import annotations
 
 import argparse
@@ -26,9 +27,7 @@ def _format_pretty(report: Report, use_color: bool) -> str:
         if use_color:
             prefix = f"{_SEV_COLOR.get(sev, '')}{prefix}{_RESET}"
         match = f.match if len(f.match) < 60 else f.match[:57] + "..."
-        lines.append(
-            f"{prefix:<22} {f.detector:<30} {match!r:<40} (line {f.line}, col {f.column})"
-        )
+        lines.append(f"{prefix:<22} {f.detector:<30} {match!r:<40} (line {f.line}, col {f.column})")
     if not lines:
         return "OK — no findings\n"
     lines.append("")

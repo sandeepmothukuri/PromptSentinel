@@ -1,4 +1,5 @@
 """Detector registry."""
+
 from promptshield.detectors.base import Detector, RawFinding
 from promptshield.detectors.injection import INJECTION_DETECTORS
 from promptshield.detectors.jailbreak import JAILBREAK_DETECTORS

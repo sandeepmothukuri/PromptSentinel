@@ -29,5 +29,5 @@ def test_to_dict_serializable():
 def test_line_and_column():
     text = "line one\nline two has a@b.com on it"
     r = Scanner().scan(text)
-    email = [f for f in r.findings if f.detector == "pii.email"][0]
+    email = next(f for f in r.findings if f.detector == "pii.email")
     assert email.line == 2
