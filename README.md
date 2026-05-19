@@ -9,7 +9,19 @@
 
 `promptshield` is a zero-dependency-by-default security scanner for the LLM era. Drop it in front of any OpenAI / Anthropic / Ollama / local-model call to block leaks and attacks at the boundary.
 
-![promptshield demo](docs/screenshots/demo.png)
+## Demo
+
+### Scanning a file — catches 10 issues across 4 categories
+![promptshield scan demo](docs/screenshots/demo.png)
+
+### Python middleware — block unsafe prompts before they reach OpenAI/Anthropic
+![library usage](docs/screenshots/library_usage.png)
+
+### JSON output — pipe into CI/CD pipelines
+![json output](docs/screenshots/json_output.png)
+
+### Test suite — 32 tests, 0 failures, pure stdlib
+![tests passing](docs/screenshots/tests_passing.png)
 
 ## Why
 
