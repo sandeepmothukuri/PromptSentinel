@@ -3,8 +3,8 @@ FastAPI middleware — scan every request body for prompt injection before it
 reaches your LLM route.
 
 Usage:
-    from integrations.fastapi_middleware import PromptShieldMiddleware
-    app.add_middleware(PromptShieldMiddleware, block_on="HIGH", fields=["message"])
+    from integrations.fastapi_middleware import PromptSentinelMiddleware
+    app.add_middleware(PromptSentinelMiddleware, block_on="HIGH", fields=["message"])
 """
 
 from __future__ import annotations
@@ -19,7 +19,7 @@ from starlette.responses import JSONResponse, Response
 from promptsentinel.scanner import Scanner, Severity
 
 
-class PromptShieldMiddleware(BaseHTTPMiddleware):
+class PromptSentinelMiddleware(BaseHTTPMiddleware):
     def __init__(
         self,
         app,
@@ -44,7 +44,7 @@ class PromptShieldMiddleware(BaseHTTPMiddleware):
                             return JSONResponse(
                                 status_code=400,
                                 content={
-                                    "error": "blocked_by_promptshield",
+                                    "error": "blocked_by_promptsentinel",
                                     "reason": report.summary(),
                                     "findings": [
                                         {

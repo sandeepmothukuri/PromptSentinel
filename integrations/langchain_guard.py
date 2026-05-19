@@ -2,8 +2,8 @@
 LangChain input guard — wraps any chain to block unsafe prompts.
 
 Usage:
-    from integrations.langchain_guard import PromptShieldGuard
-    safe_chain = PromptShieldGuard(chain=my_chain, block_on="HIGH")
+    from integrations.langchain_guard import PromptSentinelGuard
+    safe_chain = PromptSentinelGuard(chain=my_chain, block_on="HIGH")
     result = safe_chain.invoke({"input": user_message})
 """
 
@@ -12,7 +12,7 @@ from __future__ import annotations
 from promptsentinel.scanner import Scanner, Severity
 
 
-class PromptShieldGuard:
+class PromptSentinelGuard:
     """Wraps a LangChain Runnable, scanning inputs before invocation."""
 
     def __init__(

@@ -25,13 +25,13 @@ format:
 	ruff check --fix .
 
 typecheck:
-	mypy promptshield/
+	mypy promptsentinel/
 
 test:
 	pytest -v
 
 coverage:
-	pytest --cov=promptshield --cov-report=term-missing --cov-report=html
+	pytest --cov=promptsentinel --cov-report=term-missing --cov-report=html
 	@echo "HTML report: htmlcov/index.html"
 
 serve:
