@@ -1,0 +1,46 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "promptshield"
+version = "0.1.0"
+description = "Scan LLM prompts and responses for PII, secrets, prompt injection, and jailbreak attempts."
+readme = "README.md"
+license = { text = "MIT" }
+authors = [{ name = "Sandeep Mothukuri", email = "sandeep.mothukuris@gmail.com" }]
+requires-python = ">=3.9"
+keywords = ["llm", "security", "prompt-injection", "pii", "jailbreak", "ai-safety", "guardrails"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Information Technology",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Security",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+dependencies = []
+
+[project.optional-dependencies]
+pretty = ["rich>=13.0", "click>=8.0"]
+dev = ["pytest>=7.0", "pytest-cov>=4.0", "rich>=13.0", "click>=8.0"]
+
+[project.scripts]
+promptshield = "promptshield.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/sandeepmothukuri/promptshield"
+Repository = "https://github.com/sandeepmothukuri/promptshield"
+Issues = "https://github.com/sandeepmothukuri/promptshield/issues"
+
+[tool.setuptools.packages.find]
+include = ["promptshield*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-v --tb=short"
