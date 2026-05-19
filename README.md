@@ -15,42 +15,49 @@
 
 ## Demo
 
-### Scanning a file — 10 findings across 4 categories (CRITICAL / HIGH / MEDIUM)
-![scan demo](docs/screenshots/demo.png)
+### Real-time scan — 10 findings across 4 categories
+![scan demo](docs/screenshots/01_scan_demo.png)
 
-### Python middleware — block unsafe prompts before they reach OpenAI/Anthropic
-![library usage](docs/screenshots/library_usage.png)
+### OpenAI middleware — block unsafe prompts before they reach the API
+![library middleware](docs/screenshots/12_library_middleware.png)
 
 ### JSON output — structured, pipe-friendly for CI/CD
-![json output](docs/screenshots/json_output.png)
+![json output](docs/screenshots/03_json_output.png)
 
 ### SARIF output — upload directly to GitHub Code Scanning
-![sarif output](docs/screenshots/sarif_output.png)
+![sarif output](docs/screenshots/04_sarif_output.png)
 
 ### All 22 detectors across 4 categories
-![list detectors](docs/screenshots/list_detectors.png)
+![list detectors](docs/screenshots/02_list_detectors.png)
 
 ---
 
-## Code Quality
+## Code Quality & Security
 
-### pytest + coverage — 32/32 passed, 96.65% on core modules
-![pytest coverage](docs/screenshots/pytest_coverage.png)
+### pytest — 32/32 passed, 96.65% coverage on core modules
+![pytest coverage](docs/screenshots/05_pytest_coverage.png)
 
-### ruff — linter + formatter, zero issues across all files
-![ruff clean](docs/screenshots/ruff_clean.png)
+### ruff — linter + formatter, zero issues
+![ruff clean](docs/screenshots/06_ruff_clean.png)
 
 ### mypy strict — 0 type errors across 10 source files
-![mypy clean](docs/screenshots/mypy_clean.png)
+![mypy clean](docs/screenshots/07_mypy_clean.png)
 
-### pre-commit — 10 hooks enforced on every git commit
-![pre-commit hooks](docs/screenshots/precommit_hooks.png)
-
-### git commit with live hook enforcement
-![git commit hooks](docs/screenshots/git_commit_hooks.png)
+### pre-commit — 10 hooks run automatically on every git commit
+![pre-commit](docs/screenshots/08_precommit_hooks.png)
 
 ### Makefile — make lint | typecheck | test | coverage
-![makefile](docs/screenshots/makefile_commands.png)
+![makefile](docs/screenshots/11_makefile.png)
+
+---
+
+## Repository Health
+
+### Branch protection — main is locked down
+![branch protection](docs/screenshots/10_branch_protection.png)
+
+### Full commit history
+![git log](docs/screenshots/09_git_log.png)
 
 ## Why
 
