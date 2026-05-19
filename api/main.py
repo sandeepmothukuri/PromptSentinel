@@ -21,7 +21,10 @@ app = FastAPI(
     description="Scan LLM prompts for PII, secrets, prompt injection, and jailbreaks.",
     version=__version__,
     license_info={"name": "MIT"},
-    contact={"name": "Sandeep Mothukuri", "url": "https://github.com/sandeepmothukuri/promptshield"},
+    contact={
+        "name": "Sandeep Mothukuri",
+        "url": "https://github.com/sandeepmothukuri/promptshield",
+    },
 )
 
 app.add_middleware(
@@ -42,7 +45,9 @@ def scan(req: ScanRequest) -> ScanResponse:
     try:
         min_sev = Severity.parse(req.min_severity)
     except (KeyError, ValueError) as exc:
-        raise HTTPException(status_code=422, detail=f"Invalid min_severity: {req.min_severity!r}") from exc
+        raise HTTPException(
+            status_code=422, detail=f"Invalid min_severity: {req.min_severity!r}"
+        ) from exc
 
     scanner = Scanner(disabled=req.disabled)
     report = scanner.scan(req.text)

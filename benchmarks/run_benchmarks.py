@@ -113,11 +113,7 @@ def main() -> None:
     args = parser.parse_args()
 
     scanner = Scanner()
-    datasets = (
-        ["injection", "jailbreak"]
-        if args.category == "all"
-        else [args.category]
-    )
+    datasets = ["injection", "jailbreak"] if args.category == "all" else [args.category]
 
     results = [run(d, scanner) for d in datasets]
 
