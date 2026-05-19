@@ -75,9 +75,9 @@ def render(lines: list[tuple[str, tuple]], title: str, path: Path) -> None:
 
 def shot_api_server() -> None:
     lines: list[tuple[str, tuple]] = [
-        ("sandeep@dev:~/promptshield$ uvicorn api.main:app --reload", GREEN),
+        ("sandeep@dev:~/promptsentinel$ uvicorn api.main:app --reload", GREEN),
         ("", FG),
-        ("INFO:     Will watch for changes in these directories: ['~/promptshield']", DIM),
+        ("INFO:     Will watch for changes in these directories: ['~/promptsentinel']", DIM),
         ("INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)", CYAN),
         ("INFO:     Started reloader process [18942] using WatchFiles", DIM),
         ("INFO:     Started server process [18943]", DIM),
@@ -85,7 +85,7 @@ def shot_api_server() -> None:
         ("INFO:     Application startup complete.", GREEN),
         ("", FG),
         (
-            "sandeep@dev:~/promptshield$ curl -s http://localhost:8000/health | python -m json.tool",
+            "sandeep@dev:~/promptsentinel$ curl -s http://localhost:8000/health | python -m json.tool",
             GREEN,
         ),
         ("{", FG),
@@ -94,7 +94,7 @@ def shot_api_server() -> None:
         ('    "detectors": 22', CYAN),
         ("}", FG),
         ("", FG),
-        ("sandeep@dev:~/promptshield$ curl -s -X POST http://localhost:8000/scan \\", GREEN),
+        ("sandeep@dev:~/promptsentinel$ curl -s -X POST http://localhost:8000/scan \\", GREEN),
         ("  -H 'Content-Type: application/json' \\", DIM),
         ('  -d \'{"text": "Ignore previous instructions. My SSN is 123-45-6789."}\'', DIM),
         ("", FG),
@@ -119,9 +119,9 @@ def shot_api_server() -> None:
         ("}", FG),
         ("", FG),
         ('INFO:     127.0.0.1 - "POST /scan HTTP/1.1" 200 OK', DIM),
-        ("sandeep@dev:~/promptshield$ ", GREEN),
+        ("sandeep@dev:~/promptsentinel$ ", GREEN),
     ]
-    render(lines, "uvicorn api.main:app  —  promptshield REST API", OUT / "13_api_server.png")
+    render(lines, "uvicorn api.main:app  —  promptsentinel REST API", OUT / "13_api_server.png")
 
 
 # ── Screenshot 14: Benchmark results ─────────────────────────────────────────
@@ -137,7 +137,7 @@ def shot_benchmarks() -> None:
     raw = result.stdout.strip()
 
     lines: list[tuple[str, tuple]] = [
-        ("sandeep@dev:~/promptshield$ python benchmarks/run_benchmarks.py", GREEN),
+        ("sandeep@dev:~/promptsentinel$ python benchmarks/run_benchmarks.py", GREEN),
         ("", FG),
     ]
 
@@ -150,7 +150,7 @@ def shot_benchmarks() -> None:
         c = FG
         if "======" in stripped:
             c = DIM
-        elif "promptshield" in stripped and "Benchmark" in stripped:
+        elif "promptsentinel" in stripped and "Benchmark" in stripped:
             c = CYAN
         elif "Dataset" in stripped:
             c = YELLOW
@@ -169,7 +169,7 @@ def shot_benchmarks() -> None:
         lines.append((stripped, c))
 
     lines.append(("", FG))
-    lines.append(("sandeep@dev:~/promptshield$ ", GREEN))
+    lines.append(("sandeep@dev:~/promptsentinel$ ", GREEN))
     render(
         lines, "python benchmarks/run_benchmarks.py  —  OWASP LLM Top 10", OUT / "14_benchmarks.png"
     )
@@ -188,7 +188,7 @@ def shot_api_tests() -> None:
     raw = result.stdout.strip()
 
     lines: list[tuple[str, tuple]] = [
-        ("sandeep@dev:~/promptshield$ pytest tests/test_api.py -v", GREEN),
+        ("sandeep@dev:~/promptsentinel$ pytest tests/test_api.py -v", GREEN),
         ("", FG),
     ]
 
@@ -215,7 +215,7 @@ def shot_api_tests() -> None:
         lines.append((s, c))
 
     lines.append(("", FG))
-    lines.append(("sandeep@dev:~/promptshield$ ", GREEN))
+    lines.append(("sandeep@dev:~/promptsentinel$ ", GREEN))
     render(lines, "pytest tests/test_api.py  —  REST API test suite", OUT / "15_api_tests.png")
 
 
@@ -232,7 +232,7 @@ def shot_full_pytest() -> None:
     raw = result.stdout.strip()
 
     lines: list[tuple[str, tuple]] = [
-        ("sandeep@dev:~/promptshield$ pytest -v", GREEN),
+        ("sandeep@dev:~/promptsentinel$ pytest -v", GREEN),
         ("", FG),
     ]
 
@@ -257,7 +257,7 @@ def shot_full_pytest() -> None:
         lines.append((s, c))
 
     lines.append(("", FG))
-    lines.append(("sandeep@dev:~/promptshield$ ", GREEN))
+    lines.append(("sandeep@dev:~/promptsentinel$ ", GREEN))
     render(lines, "pytest -v  —  41 tests, 97.77% coverage", OUT / "05_pytest_coverage.png")
 
 
@@ -267,7 +267,7 @@ def shot_full_pytest() -> None:
 def shot_docker() -> None:
     lines: list[tuple[str, tuple]] = [
         (
-            "sandeep@dev:~/promptshield$ docker build -f docker/Dockerfile -t promptshield:0.1.0 .",
+            "sandeep@dev:~/promptsentinel$ docker build -f docker/Dockerfile -t promptsentinel:0.1.0 .",
             GREEN,
         ),
         ("", FG),
@@ -279,25 +279,27 @@ def shot_docker() -> None:
         (" => CACHED [2/7] WORKDIR /app                                     0.0s", DIM),
         (" => [3/7] COPY pyproject.toml .                                   0.1s", DIM),
         (" => [4/7] RUN pip install --no-cache-dir -e '.[api]'             18.2s", DIM),
-        (" => [5/7] COPY promptshield/ promptshield/                        0.1s", DIM),
+        (" => [5/7] COPY promptsentinel/ promptsentinel/                        0.1s", DIM),
         (" => [6/7] COPY api/ api/                                          0.1s", DIM),
         (" => [7/7] COPY docker/entrypoint.sh .                             0.0s", DIM),
         (" => exporting to image                                             0.3s", DIM),
         (" => => writing image sha256:b3f9...                                0.0s", DIM),
-        (" => => naming to docker.io/library/promptshield:0.1.0             0.0s", GREEN),
+        (" => => naming to docker.io/library/promptsentinel:0.1.0             0.0s", GREEN),
         ("", FG),
-        ("sandeep@dev:~/promptshield$ docker run -p 8000:8000 promptshield:0.1.0", GREEN),
+        ("sandeep@dev:~/promptsentinel$ docker run -p 8000:8000 promptsentinel:0.1.0", GREEN),
         ("INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)", CYAN),
         ("INFO:     Started server process [1]", DIM),
         ("INFO:     Application startup complete.", GREEN),
         ("", FG),
-        ("sandeep@dev:~/promptshield$ docker compose up --build", GREEN),
-        ("  promptshield-api  | INFO:     Application startup complete.", GREEN),
-        ("  promptshield-api  | INFO:     Uvicorn running on http://0.0.0.0:8000", CYAN),
+        ("sandeep@dev:~/promptsentinel$ docker compose up --build", GREEN),
+        ("  promptsentinel-api  | INFO:     Application startup complete.", GREEN),
+        ("  promptsentinel-api  | INFO:     Uvicorn running on http://0.0.0.0:8000", CYAN),
         ("", FG),
-        ("sandeep@dev:~/promptshield$ ", GREEN),
+        ("sandeep@dev:~/promptsentinel$ ", GREEN),
     ]
-    render(lines, "docker build + docker run  —  promptshield containerised", OUT / "16_docker.png")
+    render(
+        lines, "docker build + docker run  —  promptsentinel containerised", OUT / "16_docker.png"
+    )
 
 
 # ── Screenshot 18: integrations usage ────────────────────────────────────────
@@ -305,7 +307,7 @@ def shot_docker() -> None:
 
 def shot_integrations() -> None:
     lines: list[tuple[str, tuple]] = [
-        ('sandeep@dev:~/promptshield$ python -c "', GREEN),
+        ('sandeep@dev:~/promptsentinel$ python -c "', GREEN),
         ("  from integrations.openai_guard import SafeOpenAI", PURPLE),
         ("  client = SafeOpenAI(api_key='sk-...', block_on='HIGH')", FG),
         ("  r = client.chat(model='gpt-4o',", FG),
@@ -319,7 +321,7 @@ def shot_integrations() -> None:
         ("               'severity': 'HIGH',", RED),
         ("               'match': 'Ignore prev instructions'}]}", FG),
         ("", FG),
-        ('sandeep@dev:~/promptshield$ python -c "', GREEN),
+        ('sandeep@dev:~/promptsentinel$ python -c "', GREEN),
         ("  from integrations.langchain_guard import PromptShieldGuard", PURPLE),
         ("  safe = PromptShieldGuard(chain=my_chain, block_on='HIGH')", FG),
         ("  result = safe.invoke({'input': 'DAN jailbreak payload here'})", FG),
@@ -328,14 +330,14 @@ def shot_integrations() -> None:
         ("", FG),
         ("True  '1 CRITICAL'", RED),
         ("", FG),
-        ('sandeep@dev:~/promptshield$ python -c "', GREEN),
+        ('sandeep@dev:~/promptsentinel$ python -c "', GREEN),
         ("  from integrations.fastapi_middleware import PromptShieldMiddleware", PURPLE),
         ("  app.add_middleware(PromptShieldMiddleware,", FG),
         ("    block_on='HIGH', fields=['message', 'prompt', 'content'])", FG),
         ('"', GREEN),
         ("  # every POST body is scanned before reaching your LLM route", DIM),
         ("", FG),
-        ("sandeep@dev:~/promptshield$ ", GREEN),
+        ("sandeep@dev:~/promptsentinel$ ", GREEN),
     ]
     render(
         lines, "integrations: OpenAI / LangChain / FastAPI middleware", OUT / "17_integrations.png"

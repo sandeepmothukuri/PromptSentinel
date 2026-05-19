@@ -3,7 +3,7 @@ requires = ["setuptools>=68", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "promptshield"
+name = "promptsentinel"
 version = "0.1.0"
 description = "Scan LLM prompts and responses for PII, secrets, prompt injection, and jailbreak attempts."
 readme = "README.md"
@@ -49,28 +49,28 @@ dev = [
 ]
 
 [project.scripts]
-promptshield = "promptshield.cli:main"
+promptsentinel = "promptsentinel.cli:main"
 
 [project.urls]
-Homepage = "https://github.com/sandeepmothukuri/promptshield"
-Repository = "https://github.com/sandeepmothukuri/promptshield"
-Issues = "https://github.com/sandeepmothukuri/promptshield/issues"
+Homepage = "https://github.com/sandeepmothukuri/promptsentinel"
+Repository = "https://github.com/sandeepmothukuri/promptsentinel"
+Issues = "https://github.com/sandeepmothukuri/promptsentinel/issues"
 
 [tool.setuptools.packages.find]
-include = ["promptshield*"]
+include = ["promptsentinel*"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
-addopts = "-v --tb=short --cov=promptshield --cov-report=term-missing --cov-report=xml"
+addopts = "-v --tb=short --cov=promptsentinel --cov-report=term-missing --cov-report=xml"
 
 [tool.coverage.run]
-source = ["promptshield"]
-omit = ["promptshield/__main__.py"]
+source = ["promptsentinel"]
+omit = ["promptsentinel/__main__.py"]
 
 [tool.coverage.report]
 show_missing = true
 fail_under = 65
-omit = ["promptshield/__main__.py", "promptshield/cli.py"]
+omit = ["promptsentinel/__main__.py", "promptsentinel/cli.py"]
 
 [tool.ruff]
 target-version = "py39"

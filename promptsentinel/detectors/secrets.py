@@ -6,7 +6,7 @@ import math
 import re
 from collections.abc import Iterable
 
-from promptshield.detectors.base import Detector, RawFinding, RegexDetector
+from promptsentinel.detectors.base import Detector, RawFinding, RegexDetector
 
 SECRET_DETECTORS: list[Detector] = [
     RegexDetector(

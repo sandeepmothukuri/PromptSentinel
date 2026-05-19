@@ -8,7 +8,7 @@ ROOT = Path(__file__).resolve().parents[1]
 
 def _run(args, input_text=""):
     return subprocess.run(
-        [sys.executable, "-m", "promptshield", *args],
+        [sys.executable, "-m", "promptsentinel", *args],
         input=input_text,
         capture_output=True,
         text=True,
@@ -38,7 +38,7 @@ def test_cli_sarif_format():
     out = _run(["scan", "-", "--format", "sarif"], input_text="email a@b.com")
     data = json.loads(out.stdout)
     assert data["version"] == "2.1.0"
-    assert data["runs"][0]["tool"]["driver"]["name"] == "promptshield"
+    assert data["runs"][0]["tool"]["driver"]["name"] == "promptsentinel"
 
 
 def test_cli_fail_on_high_passes_medium():

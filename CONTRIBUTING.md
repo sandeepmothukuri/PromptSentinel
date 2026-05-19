@@ -1,4 +1,4 @@
-# Contributing to promptshield
+# Contributing to promptsentinel
 
 Thank you for helping make LLM applications safer. Every PR — whether a new detector, a documentation fix, or a false-negative report — matters.
 
@@ -6,7 +6,7 @@ Thank you for helping make LLM applications safer. Every PR — whether a new de
 
 | Type | How |
 |------|-----|
-| New detector / pattern | Add to `promptshield/detectors/`, add tests, open PR |
+| New detector / pattern | Add to `promptsentinel/detectors/`, add tests, open PR |
 | False negative (missed attack) | Open issue with the bypass string → we add coverage |
 | False positive (wrong detection) | Open issue with the benign text → we refine patterns |
 | Integration (new framework) | Add to `integrations/`, add example, open PR |
@@ -17,8 +17,8 @@ Thank you for helping make LLM applications safer. Every PR — whether a new de
 ## Setup
 
 ```bash
-git clone https://github.com/sandeepmothukuri/promptshield
-cd promptshield
+git clone https://github.com/sandeepmothukuri/promptsentinel
+cd promptsentinel
 python -m venv .venv
 source .venv/bin/activate   # Windows: .venv\Scripts\activate
 pip install -e ".[dev]"
@@ -38,11 +38,11 @@ All four must pass before submitting a PR. The CI matrix runs on Linux / macOS /
 
 ## Adding a detector
 
-1. Pick or create a file in `promptshield/detectors/`
+1. Pick or create a file in `promptsentinel/detectors/`
 2. Use `RegexDetector` for pattern-based detection:
 
 ```python
-from promptshield.detectors.base import RegexDetector
+from promptsentinel.detectors.base import RegexDetector
 
 MY_DETECTOR = RegexDetector(
     name="category.my_detector",
@@ -93,4 +93,4 @@ test(jailbreak): add GPT-4 DAN bypass coverage
 
 ## Questions?
 
-Open a [discussion](https://github.com/sandeepmothukuri/promptshield/discussions) or an [issue](https://github.com/sandeepmothukuri/promptshield/issues) — happy to help.
+Open a [discussion](https://github.com/sandeepmothukuri/promptsentinel/discussions) or an [issue](https://github.com/sandeepmothukuri/promptsentinel/issues) — happy to help.

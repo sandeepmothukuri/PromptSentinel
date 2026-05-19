@@ -30,4 +30,4 @@ template: |
 
   $CHANGES
 
-  **Full Changelog**: https://github.com/sandeepmothukuri/promptshield/compare/$PREVIOUS_TAG...v$RESOLVED_VERSION
+  **Full Changelog**: https://github.com/sandeepmothukuri/promptsentinel/compare/$PREVIOUS_TAG...v$RESOLVED_VERSION

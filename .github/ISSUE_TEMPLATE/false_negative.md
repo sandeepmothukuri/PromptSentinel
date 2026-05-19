@@ -1,6 +1,6 @@
 ---
 name: False negative (missed detection)
-about: promptshield missed a PII, secret, injection, or jailbreak pattern
+about: promptsentinel missed a PII, secret, injection, or jailbreak pattern
 title: "[MISS] "
 labels: false-negative, detection
 assignees: sandeepmothukuri

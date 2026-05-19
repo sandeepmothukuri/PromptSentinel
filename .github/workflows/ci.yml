@@ -21,7 +21,7 @@ jobs:
       - name: Ruff format check
         run: ruff format --check .
       - name: Mypy
-        run: mypy promptshield/
+        run: mypy promptsentinel/
 
   test:
     needs: lint
@@ -39,7 +39,7 @@ jobs:
       - name: Install
         run: pip install -e ".[dev]"
       - name: Run tests with coverage
-        run: pytest -v --cov=promptshield --cov-report=xml
+        run: pytest -v --cov=promptsentinel --cov-report=xml
       - name: Upload coverage to Codecov
         if: matrix.os == 'ubuntu-latest' && matrix.python-version == '3.12'
         uses: codecov/codecov-action@v4
@@ -59,8 +59,8 @@ jobs:
       - run: pip install -e .
       - name: Scan sample prompt (demonstrates tool works)
         run: |
-          python -m promptshield scan examples/sample_prompt.txt --format json | python -m json.tool
+          python -m promptsentinel scan examples/sample_prompt.txt --format json | python -m json.tool
         continue-on-error: true
       - name: Scan own source for accidental secrets
         run: |
-          find promptshield/ -name "*.py" -exec python -m promptshield scan {} \; 2>/dev/null || true
+          find promptsentinel/ -name "*.py" -exec python -m promptsentinel scan {} \; 2>/dev/null || true

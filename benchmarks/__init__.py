@@ -1,1 +1,1 @@
-"""promptshield benchmarks — attack simulation and performance profiling."""
+"""promptsentinel benchmarks — attack simulation and performance profiling."""

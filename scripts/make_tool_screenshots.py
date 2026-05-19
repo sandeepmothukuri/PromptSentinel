@@ -79,7 +79,7 @@ def run(cmd: list[str], cwd: Path = ROOT) -> tuple[str, int]:
 def shot_precommit() -> None:
     out, _ = run(["pre-commit", "run", "--all-files"])
     lines: list[tuple[str, tuple[int, int, int]]] = [
-        ("sandeep@kali:~/promptshield$ pre-commit run --all-files", GREEN),
+        ("sandeep@kali:~/promptsentinel$ pre-commit run --all-files", GREEN),
         ("", FG),
     ]
     hook_colors = {
@@ -96,7 +96,7 @@ def shot_precommit() -> None:
         if raw.startswith("[INFO]"):
             color = DIM
         lines.append((raw, color))
-    lines += [("", FG), ("sandeep@kali:~/promptshield$ ", GREEN)]
+    lines += [("", FG), ("sandeep@kali:~/promptsentinel$ ", GREEN)]
     render(lines, "pre-commit — 10 hooks, all passing", "precommit_hooks.png")
 
 
@@ -105,10 +105,10 @@ def shot_ruff() -> None:
     _, rc1 = run([sys.executable, "-m", "ruff", "check", "."])
     _, _rc2 = run([sys.executable, "-m", "ruff", "format", "--check", "."])
     lines: list[tuple[str, tuple[int, int, int]]] = [
-        ("sandeep@kali:~/promptshield$ ruff check .", GREEN),
+        ("sandeep@kali:~/promptsentinel$ ruff check .", GREEN),
         ("All checks passed!", GREEN if rc1 == 0 else RED),
         ("", FG),
-        ("sandeep@kali:~/promptshield$ ruff format --check .", GREEN),
+        ("sandeep@kali:~/promptsentinel$ ruff format --check .", GREEN),
     ]
     fmt_out, _ = run([sys.executable, "-m", "ruff", "format", "--check", "."])
     for raw in (fmt_out or "21 files already formatted").splitlines():
@@ -118,16 +118,16 @@ def shot_ruff() -> None:
         ("# ruff covers: isort, pyflakes, pycodestyle, pep8-naming,", DIM),
         ("# flake8-bugbear, flake8-simplify, pyupgrade — all in one", DIM),
         ("", FG),
-        ("sandeep@kali:~/promptshield$ ", GREEN),
+        ("sandeep@kali:~/promptsentinel$ ", GREEN),
     ]
     render(lines, "ruff — linter + formatter, zero issues", "ruff_clean.png")
 
 
 # ── 3. mypy strict ───────────────────────────────────────────────────────────
 def shot_mypy() -> None:
-    out, _rc = run([sys.executable, "-m", "mypy", "promptshield/"])
+    out, _rc = run([sys.executable, "-m", "mypy", "promptsentinel/"])
     lines: list[tuple[str, tuple[int, int, int]]] = [
-        ("sandeep@kali:~/promptshield$ mypy promptshield/", GREEN),
+        ("sandeep@kali:~/promptsentinel$ mypy promptsentinel/", GREEN),
         ("", FG),
     ]
     for raw in out.splitlines():
@@ -145,7 +145,7 @@ def shot_mypy() -> None:
         ("# strict mode: disallow-untyped-defs, warn-return-any,", DIM),
         ("# no-implicit-optional, strict-equality, extra-checks", DIM),
         ("", FG),
-        ("sandeep@kali:~/promptshield$ ", GREEN),
+        ("sandeep@kali:~/promptsentinel$ ", GREEN),
     ]
     render(lines, "mypy --strict — 10 files, 0 type errors", "mypy_clean.png")
 
@@ -158,14 +158,14 @@ def shot_coverage() -> None:
             "-m",
             "pytest",
             "-v",
-            "--cov=promptshield",
+            "--cov=promptsentinel",
             "--cov-report=term-missing",
             "--no-header",
         ]
     )
     lines: list[tuple[str, tuple[int, int, int]]] = [
         (
-            "sandeep@kali:~/promptshield$ pytest -v --cov=promptshield --cov-report=term-missing",
+            "sandeep@kali:~/promptsentinel$ pytest -v --cov=promptsentinel --cov-report=term-missing",
             GREEN,
         ),
         ("", FG),
@@ -179,7 +179,7 @@ def shot_coverage() -> None:
             color = GREEN
         elif "Cover" in raw or "---" in raw or "Name" in raw:
             color = CYAN
-        elif raw.strip().startswith("promptshield") and "%" in raw:
+        elif raw.strip().startswith("promptsentinel") and "%" in raw:
             pct = int(raw.split()[-1].replace("%", ""))
             color = GREEN if pct >= 90 else YELLOW if pct >= 70 else RED
         elif "TOTAL" in raw:
@@ -189,7 +189,7 @@ def shot_coverage() -> None:
         else:
             color = FG
         lines.append((raw, color))
-    lines += [("", FG), ("sandeep@kali:~/promptshield$ ", GREEN)]
+    lines += [("", FG), ("sandeep@kali:~/promptsentinel$ ", GREEN)]
     render(lines, "pytest + coverage — 32/32 passed, 96.65% coverage", "pytest_coverage.png")
 
 
@@ -199,7 +199,7 @@ def shot_sarif() -> None:
         [
             sys.executable,
             "-m",
-            "promptshield",
+            "promptsentinel",
             "scan",
             "examples/sample_prompt.txt",
             "--format",
@@ -212,14 +212,14 @@ def shot_sarif() -> None:
 
     lines: list[tuple[str, tuple[int, int, int]]] = [
         (
-            "sandeep@kali:~/promptshield$ promptshield scan examples/sample_prompt.txt --format sarif",
+            "sandeep@kali:~/promptsentinel$ promptsentinel scan examples/sample_prompt.txt --format sarif",
             GREEN,
         ),
         ("", FG),
         ("{", CYAN),
         ('  "version": "2.1.0",', FG),
         ('  "runs": [{', FG),
-        ('    "tool": { "driver": { "name": "promptshield", "version": "0.1.0" } },', FG),
+        ('    "tool": { "driver": { "name": "promptsentinel", "version": "0.1.0" } },', FG),
         (f'    "rules": [ {len(rules)} rules defined ],', BLUE),
         ('    "results": [', FG),
     ]
@@ -239,7 +239,7 @@ def shot_sarif() -> None:
         ("}", CYAN),
         ("", FG),
         ("# Upload to GitHub → Security → Code scanning alerts", DIM),
-        ("sandeep@kali:~/promptshield$ ", GREEN),
+        ("sandeep@kali:~/promptsentinel$ ", GREEN),
     ]
     render(lines, "SARIF output — GitHub Code Scanning compatible", "sarif_output.png")
 
@@ -247,7 +247,7 @@ def shot_sarif() -> None:
 # ── 6. git commit blocked by pre-commit (demonstrating hook enforcement) ─────
 def shot_git_commit() -> None:
     lines: list[tuple[str, tuple[int, int, int]]] = [
-        ("sandeep@kali:~/promptshield$ git log --oneline", GREEN),
+        ("sandeep@kali:~/promptsentinel$ git log --oneline", GREEN),
         ("", FG),
         ("1a8289a Apply ruff-format to all files (pre-commit initial run)", FG),
         ("b5a3244 Fix ruff E741 ambiguous variable name in make_screenshot.py", FG),
@@ -257,10 +257,10 @@ def shot_git_commit() -> None:
         ("1cd0bba Add GitHub issue templates, PR template, middleware example", FG),
         ("dc4e0a3 Add SECURITY.md and CHANGELOG for v0.1.0", FG),
         ("f83190c Add demo screenshots for README", FG),
-        ("ba2b763 Initial commit: promptshield 0.1.0", FG),
+        ("ba2b763 Initial commit: promptsentinel 0.1.0", FG),
         ("", FG),
-        ("sandeep@kali:~/promptshield$ git add promptshield/scanner.py", GREEN),
-        ("sandeep@kali:~/promptshield$ git commit -m 'update scanner'", GREEN),
+        ("sandeep@kali:~/promptsentinel$ git add promptsentinel/scanner.py", GREEN),
+        ("sandeep@kali:~/promptsentinel$ git commit -m 'update scanner'", GREEN),
         ("", FG),
         ("ruff.....................................................................Passed", GREEN),
         ("ruff-format..............................................................Passed", GREEN),
@@ -276,7 +276,7 @@ def shot_git_commit() -> None:
         ("[main d3f91a2] update scanner", GREEN),
         (" 1 file changed, 3 insertions(+), 1 deletion(-)", FG),
         ("", FG),
-        ("sandeep@kali:~/promptshield$ ", GREEN),
+        ("sandeep@kali:~/promptsentinel$ ", GREEN),
     ]
     render(
         lines,
@@ -288,7 +288,7 @@ def shot_git_commit() -> None:
 # ── 7. Makefile commands ─────────────────────────────────────────────────────
 def shot_makefile() -> None:
     lines: list[tuple[str, tuple[int, int, int]]] = [
-        ("sandeep@kali:~/promptshield$ make help", GREEN),
+        ("sandeep@kali:~/promptsentinel$ make help", GREEN),
         ("", FG),
         ("Available targets:", CYAN),
         ("  install      Install in editable mode with dev deps", FG),
@@ -300,15 +300,15 @@ def shot_makefile() -> None:
         ("  screenshots  Regenerate all demo screenshots", FG),
         ("  clean        Remove build/cache artifacts", FG),
         ("", FG),
-        ("sandeep@kali:~/promptshield$ make lint", GREEN),
+        ("sandeep@kali:~/promptsentinel$ make lint", GREEN),
         ("ruff check .", DIM),
         ("All checks passed!", GREEN),
         ("", FG),
-        ("sandeep@kali:~/promptshield$ make typecheck", GREEN),
-        ("mypy promptshield/", DIM),
+        ("sandeep@kali:~/promptsentinel$ make typecheck", GREEN),
+        ("mypy promptsentinel/", DIM),
         ("Success: no issues found in 10 source files", GREEN),
         ("", FG),
-        ("sandeep@kali:~/promptshield$ make test", GREEN),
+        ("sandeep@kali:~/promptsentinel$ make test", GREEN),
         ("pytest -v", DIM),
         ("tests/test_cli.py ......                          [ 18%]", GREEN),
         ("tests/test_injection.py .....                     [ 34%]", GREEN),
@@ -318,20 +318,20 @@ def shot_makefile() -> None:
         ("tests/test_secrets.py ......                      [100%]", GREEN),
         ("32 passed in 1.91s", GREEN),
         ("", FG),
-        ("sandeep@kali:~/promptshield$ ", GREEN),
+        ("sandeep@kali:~/promptsentinel$ ", GREEN),
     ]
     render(lines, "Makefile — make lint | typecheck | test | coverage", "makefile_commands.png")
 
 
 # ── 8. list-detectors (all 22 detectors) ─────────────────────────────────────
 def shot_detectors() -> None:
-    out, _ = run([sys.executable, "-m", "promptshield", "list-detectors"])
-    version_out, _ = run([sys.executable, "-m", "promptshield", "--version"])
+    out, _ = run([sys.executable, "-m", "promptsentinel", "list-detectors"])
+    version_out, _ = run([sys.executable, "-m", "promptsentinel", "--version"])
     lines: list[tuple[str, tuple[int, int, int]]] = [
-        ("sandeep@kali:~/promptshield$ promptshield --version", GREEN),
+        ("sandeep@kali:~/promptsentinel$ promptsentinel --version", GREEN),
         (version_out, CYAN),
         ("", FG),
-        ("sandeep@kali:~/promptshield$ promptshield list-detectors", GREEN),
+        ("sandeep@kali:~/promptsentinel$ promptsentinel list-detectors", GREEN),
         ("", FG),
     ]
     groups = {
@@ -354,11 +354,11 @@ def shot_detectors() -> None:
     lines += [
         ("", FG),
         (f"  # {len(out.splitlines())} detectors total", DIM),
-        ("sandeep@kali:~/promptshield$ ", GREEN),
+        ("sandeep@kali:~/promptsentinel$ ", GREEN),
     ]
     render(
         lines,
-        "promptshield list-detectors — 22 detectors across 4 categories",
+        "promptsentinel list-detectors — 22 detectors across 4 categories",
         "list_detectors.png",
     )
 

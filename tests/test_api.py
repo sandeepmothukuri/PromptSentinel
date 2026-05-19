@@ -1,10 +1,10 @@
-"""Tests for the promptshield REST API."""
+"""Tests for the promptsentinel REST API."""
 
 from __future__ import annotations
 
 import pytest
 
-pytest.importorskip("fastapi", reason="pip install promptshield[api]")
+pytest.importorskip("fastapi", reason="pip install promptsentinel[api]")
 
 from fastapi.testclient import TestClient
 

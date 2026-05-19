@@ -26,7 +26,7 @@
 - [ ] **Rate-limiting middleware** — per-user scan quotas
 - [ ] **Allowlist/denylist** — custom pattern override per deployment
 - [ ] **Streaming scanner** — token-by-token response scanning
-- [ ] `promptshield serve` CLI command (wraps uvicorn)
+- [ ] `promptsentinel serve` CLI command (wraps uvicorn)
 
 ## v0.3.0 — Q4 2026
 
@@ -58,4 +58,4 @@
 
 ---
 
-**Want to claim an item?** Open a [feature request](https://github.com/sandeepmothukuri/promptshield/issues/new?template=feature_request.md) and tag it with the milestone.
+**Want to claim an item?** Open a [feature request](https://github.com/sandeepmothukuri/promptsentinel/issues/new?template=feature_request.md) and tag it with the milestone.

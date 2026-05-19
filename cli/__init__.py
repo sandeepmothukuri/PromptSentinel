@@ -1,0 +1,1 @@
+"""PromptSentinel CLI entry point."""

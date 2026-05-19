@@ -6,7 +6,7 @@ from collections.abc import Iterable, Sequence
 from dataclasses import asdict, dataclass, field
 from enum import IntEnum
 
-from promptshield.detectors import ALL_DETECTORS, Detector
+from promptsentinel.detectors import ALL_DETECTORS, Detector
 
 
 class Severity(IntEnum):

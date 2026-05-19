@@ -7,8 +7,8 @@ import json
 import sys
 from pathlib import Path
 
-from promptshield import __version__
-from promptshield.scanner import Report, Scanner, Severity
+from promptsentinel import __version__
+from promptsentinel.scanner import Report, Scanner, Severity
 
 _SEV_COLOR = {
     "LOW": "\033[36m",
@@ -74,9 +74,9 @@ def _format_sarif(report: Report, source: str) -> str:
             {
                 "tool": {
                     "driver": {
-                        "name": "promptshield",
+                        "name": "promptsentinel",
                         "version": __version__,
-                        "informationUri": "https://github.com/sandeepmothukuri/promptshield",
+                        "informationUri": "https://github.com/sandeepmothukuri/promptsentinel",
                         "rules": list(rules.values()),
                     }
                 },
@@ -97,10 +97,10 @@ def _sarif_level(sev: Severity) -> str:
 
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
-        prog="promptshield",
+        prog="promptsentinel",
         description="Scan LLM prompts/responses for PII, secrets, prompt injection, and jailbreak attempts.",
     )
-    parser.add_argument("--version", action="version", version=f"promptshield {__version__}")
+    parser.add_argument("--version", action="version", version=f"promptsentinel {__version__}")
     sub = parser.add_subparsers(dest="command", required=True)
 
     scan = sub.add_parser("scan", help="Scan a file or stdin")
@@ -133,7 +133,7 @@ def main(argv: list[str] | None = None) -> int:
     args = parser.parse_args(argv)
 
     if args.command == "list-detectors":
-        from promptshield.detectors import ALL_DETECTORS
+        from promptsentinel.detectors import ALL_DETECTORS
 
         for d in ALL_DETECTORS:
             print(d.name)

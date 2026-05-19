@@ -1,1 +1,1 @@
-"""promptshield REST API — FastAPI server."""
+"""promptsentinel REST API — FastAPI server."""

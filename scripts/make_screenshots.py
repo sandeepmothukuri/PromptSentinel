@@ -1,4 +1,4 @@
-"""Render all demo screenshots for promptshield docs."""
+"""Render all demo screenshots for promptsentinel docs."""
 
 from __future__ import annotations
 
@@ -80,7 +80,7 @@ def screenshot_library() -> None:
         ("sandeep@kali:~/my-llm-app$ cat middleware.py", GREEN),
         ("", FG),
         ("from openai import OpenAI", PURPLE),
-        ("from promptshield import Scanner", PURPLE),
+        ("from promptsentinel import Scanner", PURPLE),
         ("", FG),
         ("shield = Scanner()", FG),
         ("client = OpenAI()", FG),
@@ -113,7 +113,9 @@ def screenshot_library() -> None:
         ("", FG),
         ("sandeep@kali:~/my-llm-app$ ", GREEN),
     ]
-    render(lines, "middleware.py — promptshield library integration", OUT_DIR / "library_usage.png")
+    render(
+        lines, "middleware.py — promptsentinel library integration", OUT_DIR / "library_usage.png"
+    )
 
 
 # ─── Screenshot 3: JSON output piped through jq ─────────────────────────────
@@ -124,7 +126,7 @@ def screenshot_json() -> None:
         [
             sys.executable,
             "-m",
-            "promptshield",
+            "promptsentinel",
             "scan",
             "examples/sample_prompt.txt",
             "--format",
@@ -138,7 +140,7 @@ def screenshot_json() -> None:
     findings = data["findings"][:5]  # top 5
 
     lines: list[tuple[str, tuple]] = [
-        ("sandeep@kali:~/promptshield$ promptshield scan examples/sample_prompt.txt \\", GREEN),
+        ("sandeep@kali:~/promptsentinel$ promptsentinel scan examples/sample_prompt.txt \\", GREEN),
         ("    --format json | python -m json.tool | head -60", GREEN),
         ("", FG),
         ("{", CYAN),
@@ -161,11 +163,11 @@ def screenshot_json() -> None:
         ("  ]", FG),
         ("}", CYAN),
         ("", FG),
-        ("sandeep@kali:~/promptshield$ echo $?", GREEN),
+        ("sandeep@kali:~/promptsentinel$ echo $?", GREEN),
         ("1", RED),
         ("", FG),
         ("# non-zero exit = findings found — perfect for CI pipelines", DIM),
-        ("sandeep@kali:~/promptshield$ ", GREEN),
+        ("sandeep@kali:~/promptsentinel$ ", GREEN),
     ]
     render(lines, "JSON output — pipe-friendly for CI/CD", OUT_DIR / "json_output.png")
 
@@ -183,7 +185,7 @@ def screenshot_tests() -> None:
     raw_lines = result.stdout.splitlines()
 
     lines: list[tuple[str, tuple]] = [
-        ("sandeep@kali:~/promptshield$ pytest -v", GREEN),
+        ("sandeep@kali:~/promptsentinel$ pytest -v", GREEN),
         ("", FG),
     ]
     for raw in raw_lines:
@@ -206,7 +208,7 @@ def screenshot_tests() -> None:
         lines.append((raw, color))
 
     lines.append(("", FG))
-    lines.append(("sandeep@kali:~/promptshield$ ", GREEN))
+    lines.append(("sandeep@kali:~/promptsentinel$ ", GREEN))
     render(lines, "pytest — 32 tests, 0 failures", OUT_DIR / "tests_passing.png")
 
 

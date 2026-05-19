@@ -5,7 +5,7 @@ Run: pip install openai && python examples/openai_middleware.py
 
 from __future__ import annotations
 
-from promptshield import Scanner
+from promptsentinel import Scanner
 
 shield = Scanner()
 

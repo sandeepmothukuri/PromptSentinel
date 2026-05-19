@@ -23,5 +23,5 @@ What actually happened (include full output / traceback).
 **Environment**
 - OS: [e.g. Ubuntu 22.04]
 - Python version: [e.g. 3.11]
-- promptshield version: [e.g. 0.1.0]
+- promptsentinel version: [e.g. 0.1.0]
 - Install method: [pip / git clone]

@@ -1,4 +1,4 @@
-from promptshield import Scanner
+from promptsentinel import Scanner
 
 
 def test_detects_email():

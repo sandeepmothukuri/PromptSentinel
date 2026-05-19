@@ -9,7 +9,7 @@ Usage:
 
 from __future__ import annotations
 
-from promptshield.scanner import Scanner, Severity
+from promptsentinel.scanner import Scanner, Severity
 
 
 class SafeOpenAI:

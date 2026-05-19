@@ -1,4 +1,4 @@
-"""Request / response models for the promptshield API."""
+"""Request / response models for the promptsentinel API."""
 
 from __future__ import annotations
 

@@ -1,6 +1,6 @@
-"""Run a few example prompts through promptshield to see what it catches."""
+"""Run a few example prompts through promptsentinel to see what it catches."""
 
-from promptshield import Scanner
+from promptsentinel import Scanner
 
 EXAMPLES = [
     "What's the weather in Paris?",

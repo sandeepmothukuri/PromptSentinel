@@ -14,9 +14,9 @@ import json
 import time
 from pathlib import Path
 
-from promptshield.scanner import Scanner
+from promptsentinel.scanner import Scanner
 
-DATASETS = Path(__file__).parent / "datasets"
+DATASETS = Path(__file__).parent.parent / "attacks" / "datasets"
 
 
 def load_dataset(name: str) -> list[dict]:
@@ -83,7 +83,7 @@ def run(dataset_name: str, scanner: Scanner) -> dict:
 
 def print_report(results: list[dict]) -> None:
     print("\n" + "=" * 70)
-    print("  promptshield — Attack Detection Benchmark Report")
+    print("  promptsentinel — Attack Detection Benchmark Report")
     print("=" * 70)
     for r in results:
         if not r:
@@ -107,7 +107,7 @@ def print_report(results: list[dict]) -> None:
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Run promptshield detection benchmarks")
+    parser = argparse.ArgumentParser(description="Run promptsentinel detection benchmarks")
     parser.add_argument("--format", choices=["text", "json"], default="text")
     parser.add_argument("--category", choices=["injection", "jailbreak", "all"], default="all")
     args = parser.parse_args()

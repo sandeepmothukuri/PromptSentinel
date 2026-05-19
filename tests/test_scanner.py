@@ -1,4 +1,4 @@
-from promptshield import Scanner, Severity
+from promptsentinel import Scanner, Severity
 
 
 def test_report_summary_empty():

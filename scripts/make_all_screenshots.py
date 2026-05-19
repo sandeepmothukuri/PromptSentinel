@@ -1,5 +1,5 @@
 """
-Generate all promptshield screenshots from live command output.
+Generate all promptsentinel screenshots from live command output.
 Every screenshot reflects real, current tool state.
 """
 
@@ -88,7 +88,7 @@ def cmd(args: list[str], **kw) -> tuple[str, int]:
 
 
 def prompt(text: str = "") -> tuple[str, tuple]:
-    return (f"sandeep@kali:~/promptshield$ {text}", GREEN)
+    return (f"sandeep@kali:~/promptsentinel$ {text}", GREEN)
 
 
 def blank() -> tuple[str, tuple]:
@@ -104,11 +104,11 @@ def comment(text: str) -> tuple[str, tuple]:
 # ─────────────────────────────────────────────────────────────────────────────
 def shot_scan_demo() -> None:
     out, _ = cmd(
-        [sys.executable, "-m", "promptshield", "scan", "examples/sample_prompt.txt", "--no-color"]
+        [sys.executable, "-m", "promptsentinel", "scan", "examples/sample_prompt.txt", "--no-color"]
     )
     SEV = {"[CRITICAL]": RED, "[HIGH]": RED, "[MEDIUM]": YELLOW, "[LOW]": BLUE}
     lines = [
-        prompt("promptshield scan examples/sample_prompt.txt"),
+        prompt("promptsentinel scan examples/sample_prompt.txt"),
         blank(),
     ]
     for raw in out.splitlines():
@@ -123,20 +123,20 @@ def shot_scan_demo() -> None:
             color = GREEN
         lines.append((raw, color))
     lines += [blank(), prompt()]
-    render(lines, "promptshield scan — real output", "01_scan_demo.png")
+    render(lines, "promptsentinel scan — real output", "01_scan_demo.png")
 
 
 # ─────────────────────────────────────────────────────────────────────────────
 # 2. LIST DETECTORS
 # ─────────────────────────────────────────────────────────────────────────────
 def shot_detectors() -> None:
-    ver, _ = cmd([sys.executable, "-m", "promptshield", "--version"])
-    det, _ = cmd([sys.executable, "-m", "promptshield", "list-detectors"])
+    ver, _ = cmd([sys.executable, "-m", "promptsentinel", "--version"])
+    det, _ = cmd([sys.executable, "-m", "promptsentinel", "list-detectors"])
     lines: list[tuple[str, tuple]] = [
-        prompt("promptshield --version"),
+        prompt("promptsentinel --version"),
         (ver, CYAN),
         blank(),
-        prompt("promptshield list-detectors"),
+        prompt("promptsentinel list-detectors"),
         blank(),
     ]
     groups = {
@@ -167,7 +167,7 @@ def shot_json() -> None:
         [
             sys.executable,
             "-m",
-            "promptshield",
+            "promptsentinel",
             "scan",
             "examples/sample_prompt.txt",
             "--format",
@@ -179,7 +179,7 @@ def shot_json() -> None:
     SEV_C = {"CRITICAL": RED, "HIGH": RED, "MEDIUM": YELLOW, "LOW": BLUE}
 
     lines: list[tuple[str, tuple]] = [
-        prompt("promptshield scan examples/sample_prompt.txt --format json"),
+        prompt("promptsentinel scan examples/sample_prompt.txt --format json"),
         blank(),
         ("{", CYAN),
         (f'  "summary": "{data["summary"]}",', YELLOW),
@@ -218,7 +218,7 @@ def shot_sarif() -> None:
         [
             sys.executable,
             "-m",
-            "promptshield",
+            "promptsentinel",
             "scan",
             "examples/sample_prompt.txt",
             "--format",
@@ -230,13 +230,13 @@ def shot_sarif() -> None:
     results = data["runs"][0]["results"]
 
     lines: list[tuple[str, tuple]] = [
-        prompt("promptshield scan examples/sample_prompt.txt --format sarif"),
+        prompt("promptsentinel scan examples/sample_prompt.txt --format sarif"),
         blank(),
         ("{", CYAN),
         ('  "version": "2.1.0",', FG),
         ('  "runs": [{', FG),
         ('    "tool": { "driver": {', FG),
-        ('      "name": "promptshield", "version": "0.1.0",', CYAN),
+        ('      "name": "promptsentinel", "version": "0.1.0",', CYAN),
         (f'      "rules": [ {len(rules)} rules ]', BLUE),
         ("    }},", FG),
         ('    "results": [', FG),
@@ -277,13 +277,13 @@ def shot_pytest() -> None:
             "-m",
             "pytest",
             "-v",
-            "--cov=promptshield",
+            "--cov=promptsentinel",
             "--cov-report=term-missing",
             "--no-header",
         ]
     )
     lines: list[tuple[str, tuple]] = [
-        prompt("pytest -v --cov=promptshield --cov-report=term-missing"),
+        prompt("pytest -v --cov=promptsentinel --cov-report=term-missing"),
         blank(),
     ]
     for raw in out.splitlines():
@@ -297,7 +297,7 @@ def shot_pytest() -> None:
             raw.startswith("=") or "Cover" in raw or "---" in raw or "Name" in raw or "TOTAL" in raw
         ):
             color = CYAN
-        elif raw.strip().startswith("promptshield") and "%" in raw:
+        elif raw.strip().startswith("promptsentinel") and "%" in raw:
             pct_str = raw.split()[-1].replace("%", "")
             pct = int(pct_str) if pct_str.isdigit() else 0
             color = GREEN if pct >= 90 else YELLOW
@@ -343,9 +343,9 @@ def shot_ruff() -> None:
 # 7. MYPY STRICT
 # ─────────────────────────────────────────────────────────────────────────────
 def shot_mypy() -> None:
-    out, _ = cmd([sys.executable, "-m", "mypy", "promptshield/"])
+    out, _ = cmd([sys.executable, "-m", "mypy", "promptsentinel/"])
     lines: list[tuple[str, tuple]] = [
-        prompt("mypy promptshield/ --strict"),
+        prompt("mypy promptsentinel/ --strict"),
         blank(),
     ]
     for raw in out.splitlines():
@@ -428,13 +428,13 @@ def shot_branch_protection() -> None:
         [
             "gh",
             "api",
-            "repos/sandeepmothukuri/promptshield/branches/main",
+            "repos/sandeepmothukuri/promptsentinel/branches/main",
             "--jq",
             "{protected:.protected, force_push_allowed:.protection.allow_force_pushes.enabled, deletion_allowed:.protection.allow_deletions.enabled, required_checks:.protection.required_status_checks.contexts}",
         ]
     )
     lines: list[tuple[str, tuple]] = [
-        prompt("gh api repos/sandeepmothukuri/promptshield/branches/main \\"),
+        prompt("gh api repos/sandeepmothukuri/promptsentinel/branches/main \\"),
         ("    --jq '{protected,force_push,deletions,required_checks}'", GREEN),
         blank(),
     ]
@@ -492,11 +492,11 @@ def shot_makefile() -> None:
         ("All checks passed!", GREEN),
         blank(),
         prompt("make typecheck"),
-        ("mypy promptshield/", DIM),
+        ("mypy promptsentinel/", DIM),
         ("Success: no issues found in 10 source files", GREEN),
         blank(),
         prompt("make coverage"),
-        ("pytest --cov=promptshield --cov-report=term-missing --cov-report=html", DIM),
+        ("pytest --cov=promptsentinel --cov-report=term-missing --cov-report=html", DIM),
         ("32 passed — Total coverage: 96.65%", GREEN),
         ("HTML report: htmlcov/index.html", CYAN),
         blank(),

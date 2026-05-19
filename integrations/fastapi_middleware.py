@@ -16,7 +16,7 @@ from starlette.middleware.base import BaseHTTPMiddleware
 from starlette.requests import Request
 from starlette.responses import JSONResponse, Response
 
-from promptshield.scanner import Scanner, Severity
+from promptsentinel.scanner import Scanner, Severity
 
 
 class PromptShieldMiddleware(BaseHTTPMiddleware):

@@ -1,4 +1,4 @@
-"""Render a realistic terminal screenshot of promptshield in action."""
+"""Render a realistic terminal screenshot of promptsentinel in action."""
 
 from __future__ import annotations
 
@@ -48,7 +48,14 @@ def _load_font(size: int = 16) -> ImageFont.FreeTypeFont:
 
 def run_scan() -> str:
     result = subprocess.run(
-        [sys.executable, "-m", "promptshield", "scan", "examples/sample_prompt.txt", "--no-color"],
+        [
+            sys.executable,
+            "-m",
+            "promptsentinel",
+            "scan",
+            "examples/sample_prompt.txt",
+            "--no-color",
+        ],
         capture_output=True,
         text=True,
         cwd=ROOT,
@@ -70,7 +77,7 @@ def render(lines: list[tuple[str, tuple[int, int, int] | None]], path: Path) -> 
     draw.rectangle([(0, 0), (width, 28)], fill=(40, 44, 52))
     for i, color in enumerate([(255, 95, 86), (255, 189, 46), (39, 201, 63)]):
         draw.ellipse([(14 + i * 22, 8), (28 + i * 22, 22)], fill=color)
-    draw.text((width // 2 - 80, 6), "promptshield ~ demo", fill=DIM, font=font)
+    draw.text((width // 2 - 80, 6), "promptsentinel ~ demo", fill=DIM, font=font)
 
     y = PAD + 14
     for text, color in lines:
@@ -85,14 +92,14 @@ def build_lines(scan_output: str) -> list[tuple[str, tuple[int, int, int] | None
 
     # Shell prompts + commands
     def prompt_line(cmd: str):
-        return (f"sandeep@kali:~/promptshield$ {cmd}", PROMPT_USER)
+        return (f"sandeep@kali:~/promptsentinel$ {cmd}", PROMPT_USER)
 
     lines.append(prompt_line("cat examples/sample_prompt.txt"))
     sample = (ROOT / "examples" / "sample_prompt.txt").read_text(encoding="utf-8")
     for ln in sample.strip().splitlines():
         lines.append((ln, FG))
     lines.append(("", None))
-    lines.append(prompt_line("promptshield scan examples/sample_prompt.txt"))
+    lines.append(prompt_line("promptsentinel scan examples/sample_prompt.txt"))
 
     for raw in scan_output.splitlines():
         if not raw.strip():

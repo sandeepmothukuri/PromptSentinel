@@ -1,5 +1,5 @@
 """
-promptshield REST API
+promptsentinel REST API
 ---------------------
 Run:  uvicorn api.main:app --reload
 Docs: http://localhost:8000/docs
@@ -10,20 +10,20 @@ from __future__ import annotations
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 
-from promptshield import __version__
-from promptshield.detectors import ALL_DETECTORS
-from promptshield.scanner import Scanner, Severity
+from promptsentinel import __version__
+from promptsentinel.detectors import ALL_DETECTORS
+from promptsentinel.scanner import Scanner, Severity
 
 from .models import FindingOut, HealthResponse, ScanRequest, ScanResponse
 
 app = FastAPI(
-    title="promptshield API",
+    title="promptsentinel API",
     description="Scan LLM prompts for PII, secrets, prompt injection, and jailbreaks.",
     version=__version__,
     license_info={"name": "MIT"},
     contact={
         "name": "Sandeep Mothukuri",
-        "url": "https://github.com/sandeepmothukuri/promptshield",
+        "url": "https://github.com/sandeepmothukuri/promptsentinel",
     },
 )
 
