@@ -1,4 +1,4 @@
-.PHONY: install lint format typecheck test coverage screenshots clean help
+.PHONY: install lint format typecheck test coverage serve benchmark screenshots clean help
 
 help:
 	@echo "Available targets:"
@@ -8,6 +8,8 @@ help:
 	@echo "  typecheck    Run mypy"
 	@echo "  test         Run pytest"
 	@echo "  coverage     Run tests with coverage report"
+	@echo "  serve        Start the REST API server (requires [api] extras)"
+	@echo "  benchmark    Run attack simulation benchmarks"
 	@echo "  screenshots  Regenerate all demo screenshots"
 	@echo "  clean        Remove build/cache artifacts"
 
@@ -31,6 +33,12 @@ test:
 coverage:
 	pytest --cov=promptshield --cov-report=term-missing --cov-report=html
 	@echo "HTML report: htmlcov/index.html"
+
+serve:
+	uvicorn api.main:app --reload --host 0.0.0.0 --port 8000
+
+benchmark:
+	python benchmarks/run_benchmarks.py
 
 screenshots:
 	python scripts/make_screenshot.py

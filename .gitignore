@@ -6,6 +6,7 @@ build/
 dist/
 .pytest_cache/
 .coverage
+coverage.xml
 htmlcov/
 .venv/
 venv/
@@ -15,3 +16,10 @@ env/
 .vscode/
 *.swp
 .DS_Store
+.mypy_cache/
+.ruff_cache/
+*.log
+*.sqlite3
+node_modules/
+.DS_Store
+Thumbs.db

@@ -1,0 +1,30 @@
+version: "3.9"
+
+services:
+  promptshield-api:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    image: promptshield:latest
+    container_name: promptshield-api
+    ports:
+      - "8000:8000"
+    environment:
+      - PYTHONUNBUFFERED=1
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+
+  # Optional: Run as CLI scanner
+  promptshield-cli:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    image: promptshield:latest
+    entrypoint: ["python", "-m", "promptshield"]
+    profiles: ["cli"]
+    volumes:
+      - ./scan-target:/scan-target:ro
