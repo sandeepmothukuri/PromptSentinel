@@ -7,8 +7,7 @@ import sys
 from pathlib import Path
 
 from promptshield import __version__
-from promptshield.scanner import Scanner, Severity
-
+from promptshield.scanner import Report, Scanner, Severity
 
 _SEV_COLOR = {
     "LOW": "\033[36m",
@@ -19,7 +18,7 @@ _SEV_COLOR = {
 _RESET = "\033[0m"
 
 
-def _format_pretty(report, use_color: bool) -> str:
+def _format_pretty(report: Report, use_color: bool) -> str:
     lines = []
     for f in report.findings:
         sev = f.severity.name
@@ -37,8 +36,8 @@ def _format_pretty(report, use_color: bool) -> str:
     return "\n".join(lines) + "\n"
 
 
-def _format_sarif(report, source: str) -> str:
-    rules: dict[str, dict] = {}
+def _format_sarif(report: Report, source: str) -> str:
+    rules: dict[str, dict[str, object]] = {}
     results = []
     for f in report.findings:
         rules.setdefault(

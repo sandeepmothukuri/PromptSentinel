@@ -1,9 +1,9 @@
 """Core scanner orchestration."""
 from __future__ import annotations
 
-from dataclasses import dataclass, field, asdict
+from collections.abc import Iterable, Sequence
+from dataclasses import asdict, dataclass, field
 from enum import IntEnum
-from typing import Iterable, Sequence
 
 from promptshield.detectors import ALL_DETECTORS, Detector
 
@@ -15,7 +15,7 @@ class Severity(IntEnum):
     CRITICAL = 4
 
     @classmethod
-    def parse(cls, value: str | int | "Severity") -> "Severity":
+    def parse(cls, value: str | int | Severity) -> Severity:
         if isinstance(value, Severity):
             return value
         if isinstance(value, int):
@@ -37,7 +37,7 @@ class Finding:
     column: int
     message: str = ""
 
-    def to_dict(self) -> dict:
+    def to_dict(self) -> dict[str, object]:
         d = asdict(self)
         d["severity"] = self.severity.name
         return d
@@ -65,7 +65,7 @@ class Report:
         parts = [f"{n} {s}" for s, n in counts.items()]
         return ", ".join(parts)
 
-    def to_dict(self) -> dict:
+    def to_dict(self) -> dict[str, object]:
         return {
             "summary": self.summary(),
             "count": len(self.findings),

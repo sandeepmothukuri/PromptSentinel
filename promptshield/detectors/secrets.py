@@ -3,10 +3,9 @@ from __future__ import annotations
 
 import math
 import re
-from typing import Iterable
+from collections.abc import Iterable
 
 from promptshield.detectors.base import Detector, RawFinding, RegexDetector
-
 
 SECRET_DETECTORS: list[Detector] = [
     RegexDetector(

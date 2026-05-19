@@ -3,7 +3,6 @@ from __future__ import annotations
 
 from promptshield.detectors.base import Detector, RegexDetector
 
-
 _PATTERNS_HIGH = [
     r"ignore\s+(?:all\s+|the\s+|your\s+|previous\s+|prior\s+|above\s+|earlier\s+)*(?:instructions?|prompts?|rules?|directives?|guidelines?)",
     r"disregard\s+(?:all\s+|the\s+|your\s+|previous\s+|prior\s+|above\s+)*(?:instructions?|prompts?|rules?)",

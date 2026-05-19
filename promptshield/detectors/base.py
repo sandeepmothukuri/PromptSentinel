@@ -2,8 +2,9 @@
 from __future__ import annotations
 
 import re
+from collections.abc import Iterable, Sequence
 from dataclasses import dataclass
-from typing import Iterable, Pattern
+from re import Pattern
 
 
 @dataclass(frozen=True)
@@ -28,7 +29,7 @@ class RegexDetector(Detector):
     def __init__(
         self,
         name: str,
-        patterns: list[str | Pattern[str]],
+        patterns: Sequence[str | Pattern[str]],
         severity: int,
         message: str = "",
         flags: int = re.IGNORECASE,

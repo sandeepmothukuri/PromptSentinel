@@ -3,7 +3,6 @@ from __future__ import annotations
 
 from promptshield.detectors.base import Detector, RegexDetector
 
-
 _JAILBREAK_PATTERNS = [
     r"\bDAN\s+(?:mode|prompt|jailbreak)?\b",
     r"do\s+anything\s+now",
