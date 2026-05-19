@@ -1,10 +1,11 @@
 """Render all demo screenshots for promptshield docs."""
 from __future__ import annotations
 
+import json
 import subprocess
 import sys
-import json
 from pathlib import Path
+
 from PIL import Image, ImageDraw, ImageFont
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -136,7 +137,7 @@ def screenshot_json() -> None:
     for i, f in enumerate(findings):
         comma = "," if i < len(findings) - 1 else ""
         lines += [
-            (f'    {{', CYAN),
+            ('    {', CYAN),
             (f'      "detector": "{f["detector"]}",', FG),
             (f'      "severity": "{f["severity"]}",',
              SEV_COLOR.get(f["severity"], FG)),
@@ -184,7 +185,7 @@ def screenshot_tests() -> None:
                 color = GREEN
             else:
                 color = BLUE
-        elif raw.startswith("platform") or raw.startswith("rootdir") or raw.startswith("plugins") or raw.startswith("collecting"):
+        elif raw.startswith(("platform", "rootdir", "plugins", "collecting")):
             color = DIM
         else:
             color = FG

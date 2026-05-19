@@ -7,7 +7,6 @@ from pathlib import Path
 
 from PIL import Image, ImageDraw, ImageFont
 
-
 ROOT = Path(__file__).resolve().parents[1]
 OUT_DIR = ROOT / "docs" / "screenshots"
 OUT_DIR.mkdir(parents=True, exist_ok=True)
@@ -58,8 +57,8 @@ def run_scan() -> str:
 
 def render(lines: list[tuple[str, tuple[int, int, int] | None]], path: Path) -> None:
     font = _load_font(16)
-    bold = _load_font(16)
-    max_len = max((len(l[0]) for l in lines), default=80)
+    _load_font(16)
+    max_len = max((len(ln[0]) for ln in lines), default=80)
     width = PAD * 2 + max_len * CHAR_W
     height = PAD * 2 + len(lines) * LINE_H + 30
 
