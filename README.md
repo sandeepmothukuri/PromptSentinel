@@ -1,9 +1,13 @@
 # promptshield
 
 [![CI](https://github.com/sandeepmothukuri/promptshield/actions/workflows/ci.yml/badge.svg)](https://github.com/sandeepmothukuri/promptshield/actions)
+[![CodeQL](https://github.com/sandeepmothukuri/promptshield/actions/workflows/codeql.yml/badge.svg)](https://github.com/sandeepmothukuri/promptshield/actions/workflows/codeql.yml)
 [![PyPI](https://img.shields.io/pypi/v/promptshield.svg)](https://pypi.org/project/promptshield/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/)
+[![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
+[![Checked with mypy](https://www.mypy-lang.org/static/mypy_badge.svg)](https://mypy-lang.org/)
+[![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit)](https://github.com/pre-commit/pre-commit)
 
 **Scan LLM prompts and responses for PII, secrets, prompt injection, and jailbreak attempts — before they hit an API.**
 
@@ -11,17 +15,42 @@
 
 ## Demo
 
-### Scanning a file — catches 10 issues across 4 categories
-![promptshield scan demo](docs/screenshots/demo.png)
+### Scanning a file — 10 findings across 4 categories (CRITICAL / HIGH / MEDIUM)
+![scan demo](docs/screenshots/demo.png)
 
 ### Python middleware — block unsafe prompts before they reach OpenAI/Anthropic
 ![library usage](docs/screenshots/library_usage.png)
 
-### JSON output — pipe into CI/CD pipelines
+### JSON output — structured, pipe-friendly for CI/CD
 ![json output](docs/screenshots/json_output.png)
 
-### Test suite — 32 tests, 0 failures, pure stdlib
-![tests passing](docs/screenshots/tests_passing.png)
+### SARIF output — upload directly to GitHub Code Scanning
+![sarif output](docs/screenshots/sarif_output.png)
+
+### All 22 detectors across 4 categories
+![list detectors](docs/screenshots/list_detectors.png)
+
+---
+
+## Code Quality
+
+### pytest + coverage — 32/32 passed, 96.65% on core modules
+![pytest coverage](docs/screenshots/pytest_coverage.png)
+
+### ruff — linter + formatter, zero issues across all files
+![ruff clean](docs/screenshots/ruff_clean.png)
+
+### mypy strict — 0 type errors across 10 source files
+![mypy clean](docs/screenshots/mypy_clean.png)
+
+### pre-commit — 10 hooks enforced on every git commit
+![pre-commit hooks](docs/screenshots/precommit_hooks.png)
+
+### git commit with live hook enforcement
+![git commit hooks](docs/screenshots/git_commit_hooks.png)
+
+### Makefile — make lint | typecheck | test | coverage
+![makefile](docs/screenshots/makefile_commands.png)
 
 ## Why
 
