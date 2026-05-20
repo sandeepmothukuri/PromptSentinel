@@ -24,6 +24,12 @@ def test_to_dict_serializable():
 
     r = Scanner().scan("My SSN is 123-45-6789.")
     json.dumps(r.to_dict())  # must not raise
+    assert r.to_dict()["risk_score"] == 100
+
+
+def test_risk_score_empty_report():
+    r = Scanner().scan("hello world")
+    assert r.risk_score == 0
 
 
 def test_line_and_column():

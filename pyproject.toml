@@ -57,7 +57,7 @@ Repository = "https://github.com/sandeepmothukuri/promptsentinel"
 Issues = "https://github.com/sandeepmothukuri/promptsentinel/issues"
 
 [tool.setuptools.packages.find]
-include = ["promptsentinel*"]
+include = ["promptsentinel*", "api*", "integrations*", "models*"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

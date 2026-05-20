@@ -24,6 +24,7 @@ class ScanResponse(BaseModel):
     summary: str
     count: int
     blocked: bool
+    risk_score: int
     findings: list[FindingOut]
 
 

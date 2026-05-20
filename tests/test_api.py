@@ -39,6 +39,7 @@ def test_scan_injection():
     body = response.json()
     assert body["blocked"] is True
     assert body["count"] >= 1
+    assert body["risk_score"] >= 75
     assert any(f["severity"] in ("HIGH", "CRITICAL") for f in body["findings"])
 
 

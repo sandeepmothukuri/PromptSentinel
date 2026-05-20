@@ -8,6 +8,13 @@ from enum import IntEnum
 
 from promptsentinel.detectors import ALL_DETECTORS, Detector
 
+_RISK_WEIGHTS = {
+    "LOW": 10,
+    "MEDIUM": 40,
+    "HIGH": 75,
+    "CRITICAL": 100,
+}
+
 
 class Severity(IntEnum):
     LOW = 1
@@ -66,8 +73,16 @@ class Report:
         parts = [f"{n} {s}" for s, n in counts.items()]
         return ", ".join(parts)
 
+    @property
+    def risk_score(self) -> int:
+        if not self.findings:
+            return 0
+        total = sum(_RISK_WEIGHTS[f.severity.name] for f in self.findings)
+        return min(100, total)
+
     def to_dict(self) -> dict[str, object]:
         return {
+            "risk_score": self.risk_score,
             "summary": self.summary(),
             "count": len(self.findings),
             "findings": [f.to_dict() for f in self.findings],

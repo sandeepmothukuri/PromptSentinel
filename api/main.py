@@ -57,6 +57,7 @@ def scan(req: ScanRequest) -> ScanResponse:
         summary=report.summary(),
         count=len(findings),
         blocked=report.has_findings(min_sev),
+        risk_score=report.risk_score,
         findings=[
             FindingOut(
                 detector=f.detector,

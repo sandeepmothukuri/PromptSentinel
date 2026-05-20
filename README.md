@@ -315,7 +315,7 @@ The [`attacks/`](attacks/) folder contains real-world attack samples used for te
 **SARIF output** feeds directly into GitHub Advanced Security:
 
 ```bash
-promptsentinel scan . --format sarif > security-scan.sarif
+promptsentinel scan attacks/pii_leakage.json --format sarif > security-scan.sarif
 ```
 
 **JSON output** streams to any SIEM:

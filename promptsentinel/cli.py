@@ -103,8 +103,8 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--version", action="version", version=f"promptsentinel {__version__}")
     sub = parser.add_subparsers(dest="command", required=True)
 
-    scan = sub.add_parser("scan", help="Scan a file or stdin")
-    scan.add_argument("path", help="File path, or '-' for stdin")
+    scan = sub.add_parser("scan", help="Scan text, a file, or stdin")
+    scan.add_argument("input", help="Text to scan, file path, or '-' for stdin")
     scan.add_argument(
         "--format",
         choices=["pretty", "json", "sarif"],
@@ -139,29 +139,35 @@ def main(argv: list[str] | None = None) -> int:
             print(d.name)
         return 0
 
-    if args.path == "-":
+    if args.input == "-":
         text = sys.stdin.read()
         source = "<stdin>"
     else:
-        p = Path(args.path)
-        if not p.exists():
-            print(f"error: file not found: {args.path}", file=sys.stderr)
-            return 2
-        text = p.read_text(encoding="utf-8", errors="replace")
-        source = str(p)
+        p = Path(args.input)
+        if p.exists():
+            if p.is_dir():
+                print(f"error: directory scan is not supported: {args.input}", file=sys.stderr)
+                return 2
+            text = p.read_text(encoding="utf-8", errors="replace")
+            source = str(p)
+        else:
+            text = args.input
+            source = "<argument>"
 
     scanner = Scanner(disabled=args.disable.split(",") if args.disable else [])
     report = scanner.scan(text)
+    threshold = Severity.parse(args.fail_on)
 
     if args.format == "json":
-        print(json.dumps(report.to_dict(), indent=2))
+        payload = report.to_dict()
+        payload["blocked"] = report.has_findings(threshold)
+        print(json.dumps(payload, indent=2))
     elif args.format == "sarif":
         print(_format_sarif(report, source))
     else:
         use_color = (not args.no_color) and sys.stdout.isatty()
         sys.stdout.write(_format_pretty(report, use_color))
 
-    threshold = Severity.parse(args.fail_on)
     return 1 if report.has_findings(threshold) else 0
 
 
