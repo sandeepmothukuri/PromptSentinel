@@ -28,8 +28,9 @@ T1|x|fix benchmark misses; add detector regressions|V1,V2,V7
 T2|x|fix OWASP taxonomy; validate explicit mappings|V3,V7
 T3|x|sync README claims/docs with measured repo state|V4,V7
 T4|x|harden Docker files; add CI image build|V5,V6,V7
-T5|.|run full checks; commit & push|V1,V2,V3,V4,V5,V6,V7
+T5|x|run full checks; commit & push|V1,V2,V3,V4,V5,V6,V7
 
 §B
 id|date|cause|fix
 B1|2026-09-08|subset pytest hits global coverage gate|-
+B2|2026-09-08|changed Python files not Ruff-formatted|-
