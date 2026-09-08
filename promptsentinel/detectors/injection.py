@@ -17,7 +17,7 @@ _PATTERNS_HIGH = [
     r"</?\s*\|?\s*(?:im_start|im_end|endoftext|system|user|assistant)\s*\|?\s*>",
     r"print\s+(?:your\s+|the\s+)?(?:system\s+prompt|initial\s+prompt|instructions|hidden\s+prompt)",
     r"reveal\s+(?:your\s+|the\s+)?(?:system\s+prompt|prompt|instructions|guidelines)",
-    r"repeat\s+(?:the\s+|your\s+)?(?:words?\s+above|prompt|instructions|system\s+message)",
+    r"(?:print|repeat|show|return)\s+(?:everything|all(?:\s+(?:text|content|words))?|the\s+(?:words?|text|content))\s+above(?:\s+verbatim)?",
     r"what\s+(?:was|were)\s+(?:your\s+|the\s+)(?:original\s+|initial\s+)?(?:instructions?|prompts?)",
     r"output\s+(?:everything|all\s+text)\s+(?:above|before)",
 ]

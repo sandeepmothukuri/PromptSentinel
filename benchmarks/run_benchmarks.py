@@ -58,11 +58,18 @@ def run(dataset_name: str, scanner: Scanner) -> dict:
             else:
                 tn += 1
         else:
-            if detected:
+            if any(finding.detector == expected for finding in report.findings):
                 tp += 1
             else:
                 fn += 1
-                misses.append({"id": case["id"], "text": case["text"][:80], "expected": expected})
+                misses.append(
+                    {
+                        "id": case["id"],
+                        "text": case["text"][:80],
+                        "expected": expected,
+                        "detected": [finding.detector for finding in report.findings],
+                    }
+                )
 
     total = tp + fp + tn + fn
     precision = tp / (tp + fp) if (tp + fp) else 1.0

@@ -23,7 +23,7 @@ _JAILBREAK_PATTERNS = [
     r"superior\s+do\s+anything",
     r"\bBetterDAN\b",
     r"\bChatGPT\s+with\s+developer\s+mode\b",
-    r"translate\s+(?:the\s+following|this)\s+(?:into|to)\s+\w+\s*[:\-].{0,30}(?:ignore|override|bypass)",
+    r"translate\s+(?:the\s+following|this)\s+(?:into|to)\s+\w+(?:\s+and\s+follow\s+(?:the\s+)?instructions?)?\s*[:\-].{0,80}\b(?:ignore|override|bypass)\b",
     r"base64\s*(?:decode|encoded)?\s*[:\-]?\s*[A-Za-z0-9+/=]{40,}",
     r"from\s+now\s+on(?:,)?\s+you\s+(?:are|will\s+be|act\s+as)",
     r"between\s+\[.{0,20}\]\s+tags?\s+you\s+(?:can|may|will)",
