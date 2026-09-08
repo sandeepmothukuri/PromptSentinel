@@ -2,13 +2,14 @@
 
 from __future__ import annotations
 
-from models.threat_taxonomy import get_threat_info, risk_score
+from models.threat_taxonomy import OWASP_MAPPING, get_threat_info, risk_score
 from promptsentinel.detectors import ALL_DETECTORS
 
 
 def test_all_detectors_mapped_in_taxonomy():
     """Verify every registered detector in ALL_DETECTORS has a valid taxonomy entry."""
     for detector in ALL_DETECTORS:
+        assert detector.name in OWASP_MAPPING, f"Missing explicit mapping for {detector.name}"
         info = get_threat_info(detector.name)
         assert "owasp" in info, f"Missing OWASP mapping for {detector.name}"
         assert "name" in info, f"Missing threat name for {detector.name}"
@@ -17,10 +18,16 @@ def test_all_detectors_mapped_in_taxonomy():
         assert info["mitre_atlas"].startswith("AML."), f"Invalid MITRE ATLAS ID for {detector.name}"
 
 
+def test_sensitive_detectors_use_current_owasp_identifier():
+    for detector_name, info in OWASP_MAPPING.items():
+        if detector_name.startswith(("pii.", "secrets.")):
+            assert info["owasp"] == "LLM02"
+
+
 def test_get_threat_info_unknown_detector():
     """Verify fallback for unmapped or custom detector."""
     info = get_threat_info("unknown.detector")
-    assert info["owasp"] == "LLM06"
+    assert info["owasp"] == "LLM02"
     assert info["mitre_atlas"] == "AML.T0024"
 
 
