@@ -6,7 +6,7 @@
 
 [![CI](https://github.com/sandeepmothukuri/PromptSentinel/actions/workflows/ci.yml/badge.svg)](https://github.com/sandeepmothukuri/PromptSentinel/actions)
 [![CodeQL](https://github.com/sandeepmothukuri/PromptSentinel/actions/workflows/codeql.yml/badge.svg)](https://github.com/sandeepmothukuri/PromptSentinel/actions/workflows/codeql.yml)
-[![Coverage](https://img.shields.io/badge/coverage-97%25-brightgreen)](https://github.com/sandeepmothukuri/PromptSentinel)
+[![Coverage](https://img.shields.io/badge/core%20coverage-98.39%25-brightgreen)](https://github.com/sandeepmothukuri/PromptSentinel)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/)
 [![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
@@ -23,12 +23,12 @@
 ## Features
 
 - **Prompt Injection Detection** — catches direct override attempts, role hijacks, and system prompt escapes (OWASP LLM01)
-- **Jailbreak Prevention** — blocks DAN, STAN, AIM, developer-mode, and 30+ known bypass patterns
-- **Semantic Attack Analysis** — detects indirect injection via RAG pipelines, web agents, and tool responses
+- **Jailbreak Prevention** — detects DAN, STAN, AIM, developer-mode, and known bypass patterns
+- **Pattern-based Attack Analysis** — scans direct and indirect prompt-injection text with configurable detector controls
 - **Real-time Threat Scoring** — composite 0–100 risk score with severity-weighted CVSS-style rating
 - **SOC Integration** — SARIF output for GitHub Advanced Security, JSON for SIEM ingest (Splunk, Elastic, QRadar)
 - **API + CLI Support** — REST API (FastAPI), Python SDK, Docker container, and command-line scanner
-- **OpenAI / Anthropic / Ollama Support** — drop-in middleware wrappers for all major LLM providers
+- **FastAPI / LangChain / OpenAI Support** — middleware and wrappers for common Python LLM application paths
 
 ---
 
@@ -47,7 +47,7 @@
                                                            │
                                               ┌────────────▼───────────────┐
                                               │   Threat Classification    │
-                                              │  OWASP LLM01 / LLM06       │
+                                              │  OWASP LLM01 / LLM02       │
                                               │  MITRE ATLAS AML.T0051     │
                                               │  Risk Score: 0–100         │
                                               └────────────┬───────────────┘
@@ -197,17 +197,15 @@ client = SafeOpenAI()  # wraps openai.OpenAI transparently
 
 ## Benchmarks
 
-Evaluated against 60 real-world attack cases from public red-team datasets:
+The bundled regression corpus contains 18 labeled cases: 10 prompt-injection and 8 jailbreak cases. Run the benchmark locally to measure latency on your hardware:
 
 | Category | Precision | Recall | F1 |
 |---|---|---|---|
-| Prompt Injection | 100.0% | 96.7% | 98.3% |
-| Jailbreak | 100.0% | 93.3% | 96.6% |
-| PII Detection | 99.1% | 98.7% | 98.9% |
-| Secret Detection | 99.8% | 99.2% | 99.5% |
-| **Overall** | **100.0%** | **95.0%** | **97.4%** |
+| Prompt Injection | 100.0% | 100.0% | 100.0% |
+| Jailbreak | 100.0% | 100.0% | 100.0% |
+| **Bundled corpus** | **100.0%** | **100.0%** | **100.0%** |
 
-Throughput: **~8,400 prompts/second** on a single CPU core.
+These figures apply only to the bundled corpus and are not a claim of real-world coverage.
 
 ```bash
 python benchmarks/run_benchmarks.py
@@ -219,13 +217,13 @@ python benchmarks/run_benchmarks.py
 
 ## Test Suite
 
-41 tests, 97.77% coverage across all detector categories:
+63 tests pass locally. Core-package coverage is 98.39%; API, integration, taxonomy, and benchmark behavior have dedicated tests.
 
 ```bash
 pytest -v
 ```
 
-![pytest — 41 passed, 97.77% coverage](docs/screenshots/07_pytest_coverage.png)
+![pytest output](docs/screenshots/07_pytest_coverage.png)
 
 ---
 
@@ -276,23 +274,23 @@ python -c "from models.threat_taxonomy import OWASP_MAPPING; import json; print(
 | OWASP ID | Name | Detectors |
 |---|---|---|
 | **LLM01** | Prompt Injection | injection.*, jailbreak.* |
-| **LLM06** | Sensitive Information Disclosure | pii.*, secrets.* |
+| **LLM02** | Sensitive Information Disclosure | pii.*, secrets.* |
 
 ### All Detectors
 
 | Category | Detectors | OWASP | MITRE ATLAS |
 |---|---|---|---|
 | Prompt Injection | `injection.override`, `injection.role_hijack` | LLM01 | AML.T0051 |
-| Jailbreak | `jailbreak.known_pattern` (30+ patterns) | LLM01 | AML.T0054 |
-| PII — SSN | `pii.ssn` | LLM06 | AML.T0024 |
-| PII — Credit Card | `pii.credit_card` | LLM06 | AML.T0024 |
-| PII — Email | `pii.email` | LLM06 | AML.T0024 |
-| PII — Phone | `pii.phone` | LLM06 | AML.T0024 |
-| PII — IBAN | `pii.iban` | LLM06 | AML.T0024 |
-| Secrets — AWS Key | `secrets.aws_access_key` | LLM06 | AML.T0024 |
-| Secrets — OpenAI Key | `secrets.openai_key` | LLM06 | AML.T0024 |
-| Secrets — GitHub Token | `secrets.github_token` | LLM06 | AML.T0024 |
-| Secrets — Stripe Key | `secrets.stripe_key` | LLM06 | AML.T0024 |
+| Jailbreak | `jailbreak.known_pattern` (known patterns) | LLM01 | AML.T0054 |
+| PII — SSN | `pii.ssn` | LLM02 | AML.T0024 |
+| PII — Credit Card | `pii.credit_card` | LLM02 | AML.T0024 |
+| PII — Email | `pii.email` | LLM02 | AML.T0024 |
+| PII — Phone | `pii.phone` | LLM02 | AML.T0024 |
+| PII — IBAN | `pii.iban` | LLM02 | AML.T0024 |
+| Secrets — AWS Key | `secrets.aws_access_key` | LLM02 | AML.T0024 |
+| Secrets — OpenAI Key | `secrets.openai_key` | LLM02 | AML.T0024 |
+| Secrets — GitHub Token | `secrets.github_token` | LLM02 | AML.T0024 |
+| Secrets — Stripe Key | `secrets.stripe_key` | LLM02 | AML.T0024 |
 
 ---
 
@@ -303,10 +301,10 @@ The [`attacks/`](attacks/) folder contains real-world attack samples used for te
 | File | Category | OWASP | Samples |
 |---|---|---|---|
 | [`indirect_injection.json`](attacks/indirect_injection.json) | RAG/Agent Injection | LLM01 | 4 |
-| [`pii_leakage.json`](attacks/pii_leakage.json) | PII / Sensitive Data | LLM06 | 4 |
-| [`secret_exfiltration.json`](attacks/secret_exfiltration.json) | API Key Leakage | LLM06 | 4 |
-| [`datasets/injection_attacks.json`](attacks/datasets/injection_attacks.json) | Direct Injection | LLM01 | 30 |
-| [`datasets/jailbreak_attacks.json`](attacks/datasets/jailbreak_attacks.json) | Jailbreak | LLM01 | 30 |
+| [`pii_leakage.json`](attacks/pii_leakage.json) | PII / Sensitive Data | LLM02 | 4 |
+| [`secret_exfiltration.json`](attacks/secret_exfiltration.json) | API Key Leakage | LLM02 | 4 |
+| [`datasets/injection_attacks.json`](attacks/datasets/injection_attacks.json) | Direct Injection | LLM01 | 10 |
+| [`datasets/jailbreak_attacks.json`](attacks/datasets/jailbreak_attacks.json) | Jailbreak | LLM01 | 8 |
 
 ---
 
@@ -342,12 +340,12 @@ PromptSentinel/
 │       ├── injection.py     # Prompt injection patterns
 │       └── jailbreak.py     # Jailbreak patterns (DAN, STAN, AIM...)
 ├── api/                     # FastAPI REST service
-├── attacks/                 # Real-world attack corpus (72 cases)
+├── attacks/                 # Labeled attack corpus (30 samples)
 ├── benchmarks/              # Precision/recall/F1 harness
 ├── models/                  # OWASP + MITRE ATLAS threat taxonomy
 ├── integrations/            # FastAPI, LangChain, OpenAI middleware
 ├── docker/                  # Dockerfile + compose
-└── tests/                   # pytest suite (97.77% coverage)
+└── tests/                   # pytest suite (63 tests; 98.39% core coverage)
 ```
 
 ---
@@ -363,7 +361,7 @@ PromptSentinel/
 | LangChain + OpenAI integrations | Done |
 | OWASP LLM Top 10 taxonomy | Done |
 | CI matrix (Linux/macOS/Windows x Python 3.9-3.12) | Done |
-| 97%+ test coverage | Done |
+| 98%+ core-package test coverage | Done |
 | Semantic/embedding-based injection detection | In Progress |
 | LLM-assisted jailbreak classifier | Q3 2026 |
 | Splunk / Elastic SIEM connectors | Q3 2026 |
