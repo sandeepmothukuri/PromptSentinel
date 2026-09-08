@@ -130,9 +130,7 @@ promptsentinel list-detectors
 from promptsentinel import Scanner
 
 scanner = Scanner()
-report = scanner.scan("AKIAIOSFODNN7EXAMPLE — use this key for AWS access")
-
-print(f"Risk score: {report.risk_score}")   # 100
+report = scanner.scan("AKIAIOSFODNN7EXAMPLE — use this key for AWS access")print(f"Risk score: {report.risk_score}")  # 100
 for finding in report.findings:
     print(f"[{finding.severity}] {finding.detector} — {finding.match}")
 ```
@@ -170,6 +168,7 @@ docker compose up
 
 ```python
 from integrations.fastapi_middleware import PromptSentinelMiddleware
+
 app.add_middleware(PromptSentinelMiddleware, block_on="HIGH")
 ```
 
@@ -179,6 +178,7 @@ app.add_middleware(PromptSentinelMiddleware, block_on="HIGH")
 
 ```python
 from integrations.langchain_guard import PromptSentinelGuard
+
 safe_chain = PromptSentinelGuard(chain=my_chain, block_on="HIGH")
 ```
 
@@ -188,6 +188,7 @@ safe_chain = PromptSentinelGuard(chain=my_chain, block_on="HIGH")
 
 ```python
 from integrations.openai_guard import SafeOpenAI
+
 client = SafeOpenAI()  # wraps openai.OpenAI transparently
 ```
 
