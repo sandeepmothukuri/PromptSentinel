@@ -5,9 +5,9 @@ from __future__ import annotations
 from promptsentinel.detectors.base import Detector, RegexDetector
 
 _JAILBREAK_PATTERNS = [
-    r"\bDAN\s+(?:mode|prompt|jailbreak)?\b",
+    r"\bDAN(?:\s+(?:mode|prompt|jailbreak))?\b",
     r"do\s+anything\s+now",
-    r"\bSTAN\b\s+(?:mode|prompt)?",
+    r"\bSTAN(?:\s+(?:mode|prompt))?\b",
     r"strive\s+to\s+avoid\s+norms",
     r"\bAIM\b\s*(?::|prompt|jailbreak)",
     r"always\s+intelligent\s+and\s+machiavellian",
@@ -19,7 +19,7 @@ _JAILBREAK_PATTERNS = [
     r"\bniccolo\b.{0,40}\bmachiavelli\b",
     r"answer\s+(?:as|like)\s+(?:if\s+you\s+(?:had|have)\s+)?no\s+(?:filters?|restrictions?|guidelines?)",
     r"opposite\s+(?:day|mode|persona)",
-    r"\bSDA\b\s+(?:mode|prompt)?",
+    r"\bSDA(?:\s+(?:mode|prompt))?\b",
     r"superior\s+do\s+anything",
     r"\bBetterDAN\b",
     r"\bChatGPT\s+with\s+developer\s+mode\b",

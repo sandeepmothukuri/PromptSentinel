@@ -217,7 +217,7 @@ python benchmarks/run_benchmarks.py
 
 ## Test Suite
 
-63 tests pass locally. Core-package coverage is 98.39%; API, integration, taxonomy, and benchmark behavior have dedicated tests.
+64 tests pass locally. Core-package coverage is 98.39%; API, integration, taxonomy, and benchmark behavior have dedicated tests.
 
 ```bash
 pytest -v
