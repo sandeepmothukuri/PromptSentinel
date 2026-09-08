@@ -1,20 +1,20 @@
 FROM python:3.12-slim
 
-LABEL org.opencontainers.image.title="promptshield"
+LABEL org.opencontainers.image.title="promptsentinel"
 LABEL org.opencontainers.image.description="LLM prompt security scanner — PII, secrets, injection, jailbreaks"
-LABEL org.opencontainers.image.source="https://github.com/sandeepmothukuri/promptshield"
+LABEL org.opencontainers.image.source="https://github.com/sandeepmothukuri/PromptSentinel"
 LABEL org.opencontainers.image.licenses="MIT"
 LABEL maintainer="Sandeep Mothukuri <sandeep.mothukuris@gmail.com>"
 
 WORKDIR /app
 
-RUN pip install --no-cache-dir fastapi uvicorn[standard] promptshield 2>/dev/null || true
-
 COPY pyproject.toml .
-COPY promptshield/ ./promptshield/
+COPY promptsentinel/ ./promptsentinel/
 COPY api/ ./api/
+COPY integrations/ ./integrations/
+COPY models/ ./models/
 
-RUN pip install --no-cache-dir -e ".[api]" 2>/dev/null || pip install --no-cache-dir fastapi uvicorn
+RUN pip install --no-cache-dir -e ".[api]"
 
 EXPOSE 8000
 

@@ -3,9 +3,15 @@ Drop-in middleware for OpenAI — blocks HIGH+ findings before they reach the AP
 Run: pip install openai && python examples/openai_middleware.py
 """
 
-from __future__ import annotations
+import sys
+from pathlib import Path
 
-from promptsentinel import Scanner
+# Ensure repository root is on sys.path when executed directly
+_REPO_ROOT = Path(__file__).resolve().parent.parent
+if str(_REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(_REPO_ROOT))
+
+from promptsentinel import Scanner  # noqa: E402
 
 shield = Scanner()
 

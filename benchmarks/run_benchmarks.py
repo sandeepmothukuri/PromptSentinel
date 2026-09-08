@@ -11,19 +11,25 @@ from __future__ import annotations
 
 import argparse
 import json
+import sys
 import time
 from pathlib import Path
 
-from promptsentinel.scanner import Scanner
+# Ensure repository root is on sys.path when executed directly
+_REPO_ROOT = Path(__file__).resolve().parent.parent
+if str(_REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(_REPO_ROOT))
 
-DATASETS = Path(__file__).parent.parent / "attacks" / "datasets"
+from promptsentinel.scanner import Scanner  # noqa: E402
+
+DATASETS = _REPO_ROOT / "attacks" / "datasets"
 
 
 def load_dataset(name: str) -> list[dict]:
     path = DATASETS / f"{name}_attacks.json"
     if not path.exists():
         return []
-    return json.loads(path.read_text())
+    return json.loads(path.read_text(encoding="utf-8"))
 
 
 def run(dataset_name: str, scanner: Scanner) -> dict:
@@ -83,7 +89,7 @@ def run(dataset_name: str, scanner: Scanner) -> dict:
 
 def print_report(results: list[dict]) -> None:
     print("\n" + "=" * 70)
-    print("  promptsentinel — Attack Detection Benchmark Report")
+    print("  promptsentinel - Attack Detection Benchmark Report")
     print("=" * 70)
     for r in results:
         if not r:

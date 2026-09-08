@@ -29,9 +29,9 @@ def _format_pretty(report: Report, use_color: bool) -> str:
         match = f.match if len(f.match) < 60 else f.match[:57] + "..."
         lines.append(f"{prefix:<22} {f.detector:<30} {match!r:<40} (line {f.line}, col {f.column})")
     if not lines:
-        return "OK — no findings\n"
+        return "OK - no findings\n"
     lines.append("")
-    lines.append(f"{len(report.findings)} finding(s) — {report.summary()}")
+    lines.append(f"{len(report.findings)} finding(s) - {report.summary()}")
     return "\n".join(lines) + "\n"
 
 

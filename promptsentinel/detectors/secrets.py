@@ -18,7 +18,7 @@ SECRET_DETECTORS: list[Detector] = [
     ),
     RegexDetector(
         "secrets.aws_secret_key",
-        [r"(?i)aws(.{0,20})?(secret|sk)[^\n]{0,5}['\"][0-9a-zA-Z/+]{40}['\"]"],
+        [r"(?i)aws(.{0,20})?(secret|sk)[^\n]{0,20}['\"][0-9a-zA-Z/+]{40}['\"]"],
         severity=4,
         message="AWS secret access key",
     ),
