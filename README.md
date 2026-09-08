@@ -381,6 +381,37 @@ pytest -v
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 
+
+---
+
+
+## 👤 Author
+
+**Sandeep Mothukuri**
+- GitHub: [@sandeepmothukuri](https://github.com/sandeepmothukuri)
+- Website: [cybertechnology.in](https://cybertechnology.in)
+- LinkedIn: [linkedin.com/in/sandeepmothukuri](https://www.linkedin.com/in/sandeepmothukuri)
+- Email: sandeep.mothukuris@gmail.com
+
+---
+
+## 🗂️ All Repositories
+
+| Repository | Description |
+|---|---|
+| [AI-Augmented-SOC-Lab](https://github.com/sandeepmothukuri/AI-Augmented-SOC-Lab) | AI-augmented SOC with Wazuh + TheHive + Ollama (LLaMA3) for automated triage |
+| [Enterprise-Detection-Engineering-SOC-Lab](https://github.com/sandeepmothukuri/Enterprise-Detection-Engineering-SOC-Lab) | 12-tool SOC lab with OpenSearch, Suricata, Zeek, MISP, Caldera, Velociraptor |
+| [Autonomous-SOC-Lab](https://github.com/sandeepmothukuri/Autonomous-SOC-Lab) | Autonomous SOC with AI-driven detection and self-healing playbooks |
+| [soc-threat-hunting-lab](https://github.com/sandeepmothukuri/soc-threat-hunting-lab) | Threat detection lab — Zeek, RITA, Arkime, Velociraptor, OSQuery, MISP |
+| [soc-lab-free](https://github.com/sandeepmothukuri/soc-lab-free) | Free SOC lab — OpenVAS, Wazuh, pfSense, Proxmox Mail, Lynis |
+| [SOC-Detection-and-Threat-Hunting-Lab](https://github.com/sandeepmothukuri/SOC-Detection-and-Threat-Hunting-Lab) | SOC analyst home lab — Wazuh SIEM, Sysmon, MITRE ATT&CK mapping |
+| [cyberblue](https://github.com/sandeepmothukuri/cyberblue) | Containerised blue team platform — SIEM, DFIR, CTI, SOAR, Network Analysis |
+
+
+---
+
+⭐ **Star this repo if it helped you — it helps other SOC analysts find it!**
+
 ---
 
 ## License
@@ -396,3 +427,6 @@ Built for security engineers who ship AI features in production.
 **[Report a Bug](https://github.com/sandeepmothukuri/PromptSentinel/issues/new?template=bug_report.md)** · **[Request a Feature](https://github.com/sandeepmothukuri/PromptSentinel/issues/new)** · **[Contributing Guide](CONTRIBUTING.md)**
 
 </div>
+
+
+
