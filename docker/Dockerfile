@@ -9,12 +9,16 @@ LABEL maintainer="Sandeep Mothukuri <sandeep.mothukuris@gmail.com>"
 WORKDIR /app
 
 COPY pyproject.toml .
+COPY README.md .
 COPY promptsentinel/ ./promptsentinel/
 COPY api/ ./api/
 COPY integrations/ ./integrations/
 COPY models/ ./models/
 
-RUN pip install --no-cache-dir -e ".[api]"
+RUN pip install --no-cache-dir ".[api]" \
+    && useradd --system --create-home --uid 10001 promptsentinel
+
+USER promptsentinel
 
 EXPOSE 8000
 
