@@ -49,12 +49,6 @@ The project maps supported detections to OWASP LLM Top 10 and MITRE ATLAS catego
 
 ---
 
-## License
-
-MIT — see [LICENSE](LICENSE).
-
----
-
 # 👤 Author
 
 ## Sandeep Mothukuri
