@@ -450,6 +450,16 @@ Benign application prompts pass with a risk score of `0` and an immediate `[ALLO
 
 ![PromptSentinel Web Security Console — Clean Baseline](docs/screenshots/web_dashboard_clean.png)
 
+#### Batch Multi-Prompt Audit
+Audit multiple prompts, evaluation datasets, and test batches simultaneously with automated pass/fail aggregation:
+
+![PromptSentinel Web Security Console — Batch Multi-Prompt Audit](docs/screenshots/web_dashboard_batch.png)
+
+#### Session Audit Trail & Activity Logs
+Every scan is recorded in an interactive session audit trail, enabling security teams to review historical findings, inspect risk trends, and re-analyze previous payloads:
+
+![PromptSentinel Web Security Console — Session Audit Trail](docs/screenshots/web_dashboard_history.png)
+
 ### Interactive Swagger API Documentation
 Open `http://localhost:8000/docs` in your browser:
 ![API Server Swagger Documentation](docs/screenshots/11_api_server.png)
