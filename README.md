@@ -389,9 +389,7 @@ from promptsentinel.scanner import Severity
 
 app = FastAPI()
 app.add_middleware(
-    PromptSentinelMiddleware,
-    fail_on=Severity.HIGH,
-    scan_paths=["/api/v1/chat", "/api/v1/generate"]
+    PromptSentinelMiddleware, fail_on=Severity.HIGH, scan_paths=["/api/v1/chat", "/api/v1/generate"]
 )
 ```
 ![FastAPI Middleware](docs/screenshots/15_fastapi_middleware.png)
@@ -416,8 +414,7 @@ from openai import OpenAI
 client = SafeOpenAI(OpenAI())
 # Raises PromptSecurityError if a threat is detected:
 response = client.chat.completions.create(
-    model="gpt-4o",
-    messages=[{"role": "user", "content": "What is the capital of France?"}]
+    model="gpt-4o", messages=[{"role": "user", "content": "What is the capital of France?"}]
 )
 ```
 ![OpenAI Guard](docs/screenshots/17_openai_guard.png)
