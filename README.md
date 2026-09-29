@@ -435,8 +435,20 @@ PromptSentinel ships with an interactive, browser-based **Security Operations Co
 - **Policy & Detector Switchboard**: Interactive checkboxes to toggle any of the 22 detectors on or off to test custom scanning profiles.
 - **Audit & SIEM Export**: One-click download of scan results as formatted JSON or OASIS SARIF v2.1.0 reports.
 
-Open `http://localhost:8000/dashboard` in any modern web browser:
-![Interactive Security Operations Console Web Dashboard](docs/screenshots/11c_web_dashboard.png)
+#### Live Injection Interception & Token Redaction
+When malicious instructions or system extraction attempts are submitted, PromptSentinel computes a composite risk score of `75`, triggers an immediate `[BLOCKED BY POLICY]` decision banner, and automatically sanitizes the payload:
+
+![PromptSentinel Web Security Console — Prompt Injection Scan](docs/screenshots/web_dashboard_live.png)
+
+#### Live PII & Credit Card Detection with Luhn Checksum
+Demonstrating multi-entity PII scrubbing with MOD-10 Luhn checksum verification:
+
+![PromptSentinel Web Security Console — PII & Credit Card Scan](docs/screenshots/web_dashboard_pii.png)
+
+#### Clean Baseline Verification (Negative Control)
+Benign application prompts pass with a risk score of `0` and an immediate `[ALLOWED BY POLICY]` badge:
+
+![PromptSentinel Web Security Console — Clean Baseline](docs/screenshots/web_dashboard_clean.png)
 
 ### Interactive Swagger API Documentation
 Open `http://localhost:8000/docs` in your browser:
