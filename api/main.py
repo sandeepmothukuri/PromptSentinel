@@ -9,11 +9,13 @@ from __future__ import annotations
 
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import HTMLResponse
 
 from promptsentinel import __version__
 from promptsentinel.detectors import ALL_DETECTORS
 from promptsentinel.scanner import Scanner, Severity
 
+from .dashboard import get_dashboard_html
 from .models import FindingOut, HealthResponse, ScanRequest, ScanResponse
 
 app = FastAPI(
@@ -33,6 +35,13 @@ app.add_middleware(
     allow_methods=["POST", "GET"],
     allow_headers=["*"],
 )
+
+
+@app.get("/", response_class=HTMLResponse, include_in_schema=False)
+@app.get("/dashboard", response_class=HTMLResponse, tags=["Dashboard"])
+def dashboard() -> HTMLResponse:
+    """Render the interactive PromptSentinel Security Operations Console."""
+    return HTMLResponse(content=get_dashboard_html(), status_code=200)
 
 
 @app.get("/health", response_model=HealthResponse, tags=["System"])

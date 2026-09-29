@@ -62,6 +62,7 @@
   - [CLI Arguments, Stdin Piping & CI/CD Exit Codes](#cli-arguments-stdin-piping--cicd-exit-codes)
 - [REST API Microservice](#rest-api-microservice)
   - [Starting the Server](#starting-the-server)
+  - [Interactive Security Operations Console (Web UI)](#interactive-security-operations-console-web-ui)
   - [Interactive Swagger API Documentation](#interactive-swagger-api-documentation)
   - [API Endpoints & Health Telemetry](#api-endpoints--health-telemetry)
   - [Automated API Testing](#automated-api-testing)
@@ -424,6 +425,18 @@ PromptSentinel includes an asynchronous FastAPI server for microservice deployme
 ```bash
 uvicorn api.main:app --host 0.0.0.0 --port 8000 --reload
 ```
+
+### Interactive Security Operations Console (Web UI)
+PromptSentinel ships with an interactive, browser-based **Security Operations Console** served directly at `http://localhost:8000/dashboard` (or root `http://localhost:8000/`):
+- **Real-Time Prompt Scanner**: Inspect single-turn user prompts, multi-turn dialogues, and RAG knowledge chunks with sub-millisecond execution telemetry.
+- **Preset Attack Simulations**: Quick-load buttons for Direct Instruction Overrides, DAN 6.0 Jailbreaks, PII/Credit Card leaks, and API Secret disclosures.
+- **Dynamic Risk Score Gauge**: Visual $0–100$ risk dial with policy decision badges (`[ALLOWED BY POLICY]`, `[FLAGGED / LOW RISK]`, `[BLOCKED BY POLICY]`).
+- **Automated Redaction Preview**: Side-by-side view displaying sensitive entities replaced by security tokens (`[REDACTED_PII_SSN]`, `[REDACTED_SECRETS_AWS_ACCESS_KEY]`).
+- **Policy & Detector Switchboard**: Interactive checkboxes to toggle any of the 22 detectors on or off to test custom scanning profiles.
+- **Audit & SIEM Export**: One-click download of scan results as formatted JSON or OASIS SARIF v2.1.0 reports.
+
+Open `http://localhost:8000/dashboard` in any modern web browser:
+![Interactive Security Operations Console Web Dashboard](docs/screenshots/11c_web_dashboard.png)
 
 ### Interactive Swagger API Documentation
 Open `http://localhost:8000/docs` in your browser:

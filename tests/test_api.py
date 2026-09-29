@@ -97,3 +97,19 @@ def test_list_detectors():
     assert "injection" in body
     assert "jailbreak" in body
     assert "secrets" in body
+
+
+def test_dashboard():
+    response = client.get("/dashboard")
+    assert response.status_code == 200
+    assert "text/html" in response.headers["content-type"]
+    assert "PromptSentinel" in response.text
+    assert "Prompt Security Inspection" in response.text
+    assert "Policy & Detector Switchboard" in response.text
+
+
+def test_root_renders_dashboard():
+    response = client.get("/")
+    assert response.status_code == 200
+    assert "text/html" in response.headers["content-type"]
+    assert "PromptSentinel" in response.text

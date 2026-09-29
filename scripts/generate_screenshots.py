@@ -1434,6 +1434,68 @@ def shot_api_health():
 
 
 # ─────────────────────────────────────────────────────────────────────────────
+# 23b. Web Dashboard Operations Console
+# ─────────────────────────────────────────────────────────────────────────────
+def shot_web_dashboard():
+    t = Terminal("PromptSentinel — Interactive Security Operations Console (Web UI)", width=1020)
+    t.prompt("curl -i http://localhost:8000/dashboard")
+    t.blank()
+    t.add([Span("HTTP/1.1 ", GRAY), Span("200 OK", BRIGHT_GREEN, bold=True)])
+    t.add([Span("server: ", GRAY), Span("uvicorn", WHITE)])
+    t.add([Span("content-type: ", GRAY), Span("text/html; charset=utf-8", CYAN, bold=True)])
+    t.add([Span("content-length: ", GRAY), Span("18420", WHITE)])
+    t.blank()
+    t.separator("─", 86)
+    t.add(
+        [
+            Span("  PROMPTSENTINEL WEB CONSOLE INITIALIZED AT ", WHITE),
+            Span("http://localhost:8000/dashboard", CYAN, bold=True),
+        ]
+    )
+    t.separator("─", 86)
+    t.add(
+        [
+            Span("  • Interactive Live Prompt Scanner:   ", GRAY),
+            Span("Enabled (Single-turn & RAG inspection)", GREEN),
+        ]
+    )
+    t.add(
+        [
+            Span("  • Real-Time Risk Score Dial:         ", GRAY),
+            Span("Active (0-100 composite threshold)", GREEN),
+        ]
+    )
+    t.add(
+        [
+            Span("  • Policy Decision Gate:              ", GRAY),
+            Span("Configurable (LOW | MEDIUM | HIGH | CRITICAL)", GREEN),
+        ]
+    )
+    t.add(
+        [
+            Span("  • Automated Token Masking:           ", GRAY),
+            Span("Supported (Sanitizes PII & Secrets)", GREEN),
+        ]
+    )
+    t.add(
+        [
+            Span("  • Detector Catalog Switchboard:      ", GRAY),
+            Span("22 Detectors Interactive Toggles", GREEN),
+        ]
+    )
+    t.add(
+        [
+            Span("  • Security Audit Export:             ", GRAY),
+            Span("JSON & OASIS SARIF v2.1.0 Downloads", GREEN),
+        ]
+    )
+    t.separator("─", 86)
+    t.blank()
+    t.prompt_trailing()
+    t.render("11c_web_dashboard.png")
+
+
+# ─────────────────────────────────────────────────────────────────────────────
 # 24. Latency Distribution Matrix
 # ─────────────────────────────────────────────────────────────────────────────
 def shot_latency_distribution():
@@ -1706,6 +1768,7 @@ SHOTS = [
     shot_makefile,
     shot_api_server,
     shot_api_health,
+    shot_web_dashboard,
     shot_python_sdk,
     shot_benchmarks,
     shot_latency_distribution,
