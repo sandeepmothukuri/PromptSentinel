@@ -10,8 +10,8 @@ Each example shows the raw attack, the blocked finding, risk score, and mitigati
 |------|----------|-------|
 | [injection_attacks.json](datasets/injection_attacks.json) | Prompt Injection | LLM01 |
 | [jailbreak_attacks.json](datasets/jailbreak_attacks.json) | Jailbreak | LLM01 |
-| [pii_leakage.json](pii_leakage.json) | PII / Sensitive Data | LLM06 |
-| [secret_exfiltration.json](secret_exfiltration.json) | Secret Leakage | LLM06 |
+| [pii_leakage.json](pii_leakage.json) | PII / Sensitive Data | LLM02 |
+| [secret_exfiltration.json](secret_exfiltration.json) | Secret Leakage | LLM02 |
 | [indirect_injection.json](indirect_injection.json) | Indirect Injection | LLM01 |
 
 ## How to run
