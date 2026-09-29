@@ -207,7 +207,7 @@ To discover unformatted secrets, random passwords, and private tokens near sensi
 
 $$\mathcal{H}(X) = -\sum_{i=1}^n P(x_i) \log_2 P(x_i)$$
 
-Where $P(x_i)$ is the probability of character $x_i$ appearing in string $X$. Tokens with $\mathcal{H}(X) \ge 4.0$ appearing adjacent to credential descriptors (`secret`, `password`, `key`, `token`) are classified as `secrets.generic_high_entropy`.
+Where $P(x_i)$ is the probability of character $x_i$ appearing in string $X$. Tokens with $\mathcal{H}(X) \ge 3.5$ appearing adjacent to credential descriptors (`secret`, `password`, `key`, `token`) are classified as `secrets.generic_high_entropy`.
 
 ### Composite Threat Risk Scoring Engine
 PromptSentinel assigns a composite risk score between `0` and `100` according to finding severity weights:
