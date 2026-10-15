@@ -794,6 +794,20 @@ This repository is maintained as a practical security engineering environment fo
 
 ---
 
+## 🏆 Recognition & Community Contributions
+
+### Selected for the XERJ Corpus Hub
+
+The PromptSentinel Security Operations Console Web Dashboard implementation was selected by XERJ for potential inclusion in its Corpus Hub, an open reference index designed to help AI coding agents retrieve relevant code implementations.
+
+- **Project:** [PromptSentinel](https://github.com/sandeepmothukuri/PromptSentinel)
+- **Selected implementation:** Interactive Security Operations Console Web Dashboard
+- **Technology:** Python, API development, automated testing
+- **Source licence:** MIT
+- **XERJ:** [GitHub Repository](https://github.com/xerj-org/xerj)
+
+---
+
 ### 📄 License
 
 MIT License. See [`LICENSE`](LICENSE).
